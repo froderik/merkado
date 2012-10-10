@@ -1,5 +1,8 @@
 Merkado::Application.routes.draw do
   root :to => 'heart#landing'
+
+  match 'sign_in' => 'heart#sign_in'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

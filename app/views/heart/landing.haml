@@ -1,1 +1,9 @@
-This is the merkado landing page.
+#credentials
+  = form_tag '/sign_in' do
+    - if flash[:notice]
+      = flash[:notice]
+    = label :email, 'Email'
+    = text_field_tag :email
+    = label :password, 'Password'
+    = password_field_tag :password
+    = submit_tag "Sign in"
