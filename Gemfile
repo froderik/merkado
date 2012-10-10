@@ -31,6 +31,7 @@ group :development, :test do
   gem 'capybara'        # running tests against rack
   gem 'rspec-rails'     # rspec for rails
   gem 'capybara-webkit' # webkit driver for capybara - runs headless
+  gem 'guard-rspec'     # for autotest
 end
 
 # To use ActiveModel has_secure_password
