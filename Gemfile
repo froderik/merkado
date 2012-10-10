@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+# gem 'rails' # we don't want to load activerecord so we can't require rails
+gem 'railties'
+gem 'actionpack'
+gem 'actionmailer'
+gem 'activemodel'
+gem "couch_potato"
+gem 'tzinfo'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3'
-
+# markup
 gem 'haml'
 
 
@@ -26,9 +28,9 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'capybara'
-  gem 'rspec-rails'
-  gem 'capybara-webkit'
+  gem 'capybara'        # running tests against rack
+  gem 'rspec-rails'     # rspec for rails
+  gem 'capybara-webkit' # webkit driver for capybara - runs headless
 end
 
 # To use ActiveModel has_secure_password
