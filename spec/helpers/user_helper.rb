@@ -3,6 +3,7 @@ def create_user email, password
   user.email = email
   user.password = password
   CouchPotato.database.save_document user
+  user
 end
 
 def sign_in email, password
@@ -15,6 +16,7 @@ def sign_in email, password
 end
 
 def create_and_sign_in_user email = 'default@example.com', password ='d3fau1t'
-  create_user email, password
+  user = create_user email, password
   sign_in email, password
+  user
 end
