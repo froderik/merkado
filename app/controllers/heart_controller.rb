@@ -2,6 +2,9 @@ require 'couch_potato'
 
 class HeartController < ApplicationController
   def landing
+    if session[:user_id]
+      redirect_to '/order_books'
+    end
   end
 
   def sign_in
