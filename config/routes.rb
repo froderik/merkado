@@ -3,6 +3,8 @@ Merkado::Application.routes.draw do
 
   match 'sign_in' => 'heart#sign_in'
 
+  resources :order_books
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,13 +1,12 @@
 default: &default
   split_design_documents_per_view: true # optional
-  default_language: :erlang # optional
 
 development:
   <<: *default
-  database: development_db_name
+  database: merkado_development
 test:
   <<: *default
-  database: test_db_name
+  database: merkado_test
 production:
   <<: *default
   database: <%= ENV['DB_NAME'] %>

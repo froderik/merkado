@@ -32,6 +32,7 @@ group :development, :test do
   gem 'rspec-rails'     # rspec for rails
   gem 'capybara-webkit' # webkit driver for capybara - runs headless
   gem 'guard-rspec'     # for autotest
+  gem 'database_cleaner'# to clean test data after test runs
 end
 
 # To use ActiveModel has_secure_password
