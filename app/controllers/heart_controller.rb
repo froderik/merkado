@@ -10,7 +10,12 @@ class HeartController < ApplicationController
       session[:user_id] = user.id
       redirect_to '/order_books'
     else
-      redirect_to( :root, :notice => 'Invalid user' )
+      redirect_to :root, :notice => 'Invalid user'
     end
+  end
+
+  def sign_out
+    reset_session
+    redirect_to :root, :notice => "You have been signed out"
   end
 end

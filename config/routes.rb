@@ -2,6 +2,7 @@ Merkado::Application.routes.draw do
   root :to => 'heart#landing'
 
   match 'sign_in' => 'heart#sign_in'
+  match 'sign_out' => 'heart#sign_out'
 
   resources :order_books
 
