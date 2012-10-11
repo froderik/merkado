@@ -16,7 +16,8 @@
         .container
           .row
             .span10
-              %h1 merkado
+              %h1
+                = link_to 'merkado', '/'
               -#= render 'layouts/navigation'
             .span2
               - if session[:user_id]

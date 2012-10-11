@@ -1,11 +1,12 @@
-#credentials
-  = form_tag '/sign_in', :class => 'form-inline' do
-    - if flash[:notice]
-      .alert
-        %button(type="button" class="close" data-dismiss="alert") ×
-        = flash[:notice]
-    = label :email, 'Email'
-    = text_field_tag :email
-    = label :password, 'Password'
-    = password_field_tag :password
-    = submit_tag "Sign in"
+- unless session[:user_id]
+  #credentials
+    = form_tag '/sign_in', :class => 'form-horizontal' do
+      - if flash[:notice]
+        .alert
+          %button(type="button" class="close" data-dismiss="alert") ×
+          = flash[:notice]
+      = label :email, 'Email'
+      = text_field_tag :email
+      = label :password, 'Password'
+      = password_field_tag :password
+      = submit_tag "Sign in"
