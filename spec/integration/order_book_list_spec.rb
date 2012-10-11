@@ -5,7 +5,6 @@ def create_order_book options
   order_book = OrderBook.new
   order_book.admin = options[:admin]
   order_book.name = options[:name]
-  puts "=========== #{order_book.inspect}"
   CouchPotato.database.save_document order_book
 end
 
