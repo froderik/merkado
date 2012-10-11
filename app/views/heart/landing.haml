@@ -1,7 +1,9 @@
 #credentials
-  = form_tag '/sign_in' do
+  = form_tag '/sign_in', :class => 'form-inline' do
     - if flash[:notice]
-      = flash[:notice]
+      .alert
+        %button(type="button" class="close" data-dismiss="alert") ×
+        = flash[:notice]
     = label :email, 'Email'
     = text_field_tag :email
     = label :password, 'Password'

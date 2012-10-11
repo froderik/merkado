@@ -14,10 +14,13 @@
     %header.navbar.navbar-fixed-top
       %nav.navbar-inner
         .container
-          %h1 merkado
-          -#= render 'layouts/navigation'
-          - if session[:user_id]
-            = link_to 'Sign out', 'sign_out'
+          .row
+            .span10
+              %h1 merkado
+              -#= render 'layouts/navigation'
+            .span2
+              - if session[:user_id]
+                = link_to 'Sign out', 'sign_out'
     #main{:role => "main"}
       .container
         .content
