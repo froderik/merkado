@@ -1,9 +1,6 @@
-%h2 Available order books
 
-%table.table
-  %tr
-    %th Name
-  - @order_books.each do |one_order_book|
-    %tr
-      %td
-        = one_order_book.name
+%h2 Order books you are administrating
+= render :partial => 'table', :locals => {:order_books => @admin_order_books}
+
+%h2 Available order books
+= render :partial => 'table', :locals => {:order_books => @order_books}

@@ -1,0 +1,7 @@
+%table.table
+  %tr
+    %th Name
+  - order_books.each do |one_order_book|
+    %tr
+      %td
+        = one_order_book.name
