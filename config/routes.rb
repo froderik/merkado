@@ -4,6 +4,10 @@ Merkado::Application.routes.draw do
   match 'sign_in' => 'heart#sign_in'
   match 'sign_out' => 'heart#sign_out'
 
+  # omniauth stuff
+  match '/auth/identity/callback' => 'heart#sign_in'
+  match '/auth/failure' => 'heart#auth_failure'
+
   resources :order_books
 
   # The priority is based upon order of creation:

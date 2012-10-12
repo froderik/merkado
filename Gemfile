@@ -5,11 +5,17 @@ gem 'railties'
 gem 'actionpack'
 gem 'actionmailer'
 gem 'activemodel'
-gem "couch_potato"
-gem 'tzinfo'
+
+# couch
+gem 'couch_potato'
+gem 'tzinfo' # cause needed by activesupport but required by activerecord
 
 # markup
 gem 'haml'
+
+#auth
+gem 'omniauth'
+gem 'omniauth-identity'
 
 
 # Gems used only for assets and not required

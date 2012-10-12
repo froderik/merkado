@@ -8,7 +8,7 @@ class HeartController < ApplicationController
   end
 
   def sign_in
-    user = CouchPotato.database.first User.by_email( :key => params[:email] )
+    user = CouchPotato.database.first User.by_email( :key => params[:auth_key] )
     if user
       session[:user_id] = user.id
       redirect_to '/order_books'
@@ -19,6 +19,11 @@ class HeartController < ApplicationController
 
   def sign_out
     reset_session
-    redirect_to :root, :notice => "You have been signed out"
+    redirect_to :root, :notice => 'You have been signed out'
+  end
+
+  def auth_failure
+    reset_session
+    redirect_to :root, :notice => 'Invalid user'
   end
 end

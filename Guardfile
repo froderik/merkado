@@ -6,5 +6,6 @@ guard 'rspec', :version => 2 do
   watch( %r{^app/views/.+/.+.haml$}         ) { "spec" }
   watch( %r{^config/.+.rb$}                 ) { "spec" }
   watch( 'spec/spec_helper.rb'              ) { "spec" }
+  watch( 'Gemfile.lock'                     ) { "spec" }
 end
 

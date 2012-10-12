@@ -1,7 +1,15 @@
+def create_identity email, password
+  identity = Identity.new
+  identity.email = email
+  identity.password = password
+  CouchPotato.database.save_document identity
+  identity
+end
+
 def create_user email, password
+  create_identity email, password
   user = User.new
   user.email = email
-  user.password = password
   CouchPotato.database.save_document user
   user
 end
@@ -9,7 +17,7 @@ end
 def sign_in email, password
   visit '/'
   within '#credentials' do
-    fill_in 'email', :with => email
+    fill_in 'auth_key', :with => email
     fill_in 'password', :with => password
     click_on 'Sign in'
   end
