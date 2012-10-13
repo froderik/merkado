@@ -4,4 +4,4 @@
   - order_books.each do |one_order_book|
     %tr
       %td
-        = one_order_book.name
+        = link_to one_order_book.name, url_for( one_order_book )

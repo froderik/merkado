@@ -3,4 +3,8 @@ class OrderBooksController < ApplicationController
     @admin_order_books = CouchPotato.database.view OrderBook.by_name( :key => session[:user_id] )
     @order_books = CouchPotato.database.view OrderBook.by_user( :key => session[:user_id] )
   end
+
+  def show
+    @order_book = CouchPotato.database.load params[:id]
+  end
 end
