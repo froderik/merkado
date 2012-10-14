@@ -8,7 +8,11 @@ Merkado::Application.routes.draw do
   match '/auth/identity/callback' => 'heart#sign_in'
   match '/auth/failure' => 'heart#auth_failure'
 
-  resources :order_books
+  resources :order_books do
+    member do
+      put 'add_asset'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
