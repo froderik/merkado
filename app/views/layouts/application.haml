@@ -16,9 +16,8 @@
         .container
           .row
             .span10
-              %h1
+              %h1.logo
                 = link_to 'merkado', '/'
-              -#= render 'layouts/navigation'
             .span2
               - if session[:user_id]
                 = link_to 'Sign out', 'sign_out'

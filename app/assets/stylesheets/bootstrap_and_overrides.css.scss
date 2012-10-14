@@ -1,5 +1,15 @@
+@import url(http://fonts.googleapis.com/css?family=Lato|Wallpoet);
 @import "bootstrap";
-body { padding-top: 60px; }
+body {
+  padding-top: 60px;
+  font-family: 'Lato', sans-serif;
+}
+
+.logo {
+  font-family: 'Wallpoet', cursive;
+  font-size: 48px;
+}
+
 .content { padding-top: 40px; }
 
 #add-asset-modal { width: 250px; }
