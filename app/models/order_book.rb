@@ -25,10 +25,6 @@ class OrderBook
     """
   end
 
-  # def merge other_order_book
-  #   self
-  # end
-
   view :by_name, :key => :user_admin_id
   view :by_user, :key => :user_id, :map => order_books_by_userid_js, :type => :custom, :include_docs => true
 
