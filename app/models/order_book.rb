@@ -4,7 +4,7 @@ class OrderBook
   property :user_admin_id
   property :name
   property :user_ids, :type => [String]
-  property :asset_infos, :type => [AssetInfo]
+  property :instrument_list, :type => [Instrument]
 
   def admin= admin_user
     self.user_admin_id = admin_user.id

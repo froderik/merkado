@@ -1,13 +1,13 @@
 %h1= @order_book.name
 
 - if session[:user_id] == @order_book.user_admin_id
-  %a(href="#add-asset-modal" role="button" class="btn" data-toggle="modal")
-    Add asset
-  .modal(id="add-asset-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none")
+  %a(href="#add-instrument-modal" role="button" class="btn" data-toggle="modal")
+    Add instrument
+  .modal(id="add-instrument-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none")
     .modal-header
-      %h3 Add asset
-    - add_asset_url = "/order_books/#{@order_book.id}/add_asset"
-    = form_for @new_asset, :url => add_asset_url, :remote => true, :method => :put do |f|
+      %h3 Add instrument
+    - add_instrument_url = "/order_books/#{@order_book.id}/add_instrument"
+    = form_for @new_instrument, :url => add_instrument_url, :remote => true, :method => :put do |f|
       .modal-body
         = f.label      :name
         = f.text_field :name
@@ -16,6 +16,6 @@
       .modal-footer
         = f.submit 'Save'
 
-.asset_list
-  - if @order_book.asset_infos
-    = render :partial => 'asset_list', :locals => {:order_book => @order_book}
+.instrument_list
+  - if @order_book.instrument_list
+    = render :partial => 'instrument_list', :locals => {:order_book => @order_book}

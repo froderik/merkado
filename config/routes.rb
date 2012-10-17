@@ -10,7 +10,7 @@ Merkado::Application.routes.draw do
 
   resources :order_books do
     member do
-      put 'add_asset'
+      put 'add_instrument'
     end
   end
 

@@ -1,4 +1,4 @@
-class AssetInfo
+class Instrument
   include CouchPotato::Persistence
 
   property :name

@@ -1,9 +1,9 @@
-load_assets_list = (xhr, data, status) ->
-  $('.asset_list').html(data)
-  $('#add-asset-modal').modal('hide')
+load_instrument_list = (xhr, data, status) ->
+  $('.instrument_list').html(data)
+  $('#add-instrument-modal').modal('hide')
 
-add_asset_callback = () ->
-  $('.new_asset_info').bind('ajax:success', load_assets_list)
+add_instrument_callback = () ->
+  $('.new_instrument').bind('ajax:success', load_instrument_list)
 
 $ ->
-  add_asset_callback()
+  add_instrument_callback()
