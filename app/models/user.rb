@@ -1,5 +1,6 @@
 class User
   include CouchPotato::Persistence
+  include CouchHelpers
 
   property :email
   property :locale

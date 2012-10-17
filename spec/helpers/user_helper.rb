@@ -2,7 +2,7 @@ def create_identity email, password
   identity = Identity.new
   identity.email = email
   identity.password = password
-  CouchPotato.database.save_document identity
+  identity.save
   identity
 end
 
@@ -10,7 +10,7 @@ def create_user email, password
   create_identity email, password
   user = User.new
   user.email = email
-  CouchPotato.database.save_document user
+  user.save
   user
 end
 

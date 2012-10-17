@@ -33,6 +33,7 @@ end
 class Identity
   include CouchPotato::Persistence
   include OmniAuth::Identity::Models::CouchPotatoModule
+  include CouchHelpers
 
   property :email
   property :password_digest

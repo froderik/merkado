@@ -1,5 +1,6 @@
 class OrderBook
   include CouchPotato::Persistence
+  include CouchHelpers
 
   property :user_admin_id
   property :name

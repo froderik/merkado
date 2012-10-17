@@ -14,12 +14,12 @@ class OrderBooksController < ApplicationController
   def add_instrument
     @order_book = CouchPotato.database.load params[:id]
     instrument = Instrument.new params[:instrument]
-    CouchPotato.database.save_document instrument
+    instrument.save
     instrument_list = @order_book.instrument_list || []
     new_instrument_list = Array.new instrument_list # have to create a new array to trigger save
     new_instrument_list << instrument
     @order_book.instrument_list = new_instrument_list
-    CouchPotato.database.save_document @order_book
+    @order_book.save
     render :partial => 'instrument_list', :locals => {:order_book => @order_book}, :content_type => 'text/plain'
   end
 end
