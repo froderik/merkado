@@ -1,18 +1,18 @@
 class OrderBooksController < ApplicationController
   def index
-    @admin_order_books = CouchPotato.database.view OrderBook.by_name( :key => session[:user_id] )
-    @order_books = CouchPotato.database.view OrderBook.by_user( :key => session[:user_id] )
+    @admin_order_books = OrderBook.find_by_user_admin_id session[:user_id]
+    @order_books       = OrderBook.find_by_user_id session[:user_id]
   end
 
   def show
-    @order_book = CouchPotato.database.load params[:id]
+    @order_book = Couch.find_by_id params[:id]
     if session[:user_id] == @order_book.user_admin_id
       @new_instrument = Instrument.new
     end
   end
 
   def add_instrument
-    @order_book = CouchPotato.database.load params[:id]
+    @order_book = Couch.find_by_id params[:id]
     instrument = Instrument.new params[:instrument]
     instrument.save
     instrument_list = @order_book.instrument_list || []

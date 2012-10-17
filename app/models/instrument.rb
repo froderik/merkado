@@ -1,6 +1,6 @@
 class Instrument
   include CouchPotato::Persistence
-  include CouchHelpers
+  include Couch::InstanceMethods
 
   property :name
   property :description

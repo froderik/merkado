@@ -8,7 +8,7 @@ class HeartController < ApplicationController
   end
 
   def sign_in
-    user = CouchPotato.database.first User.by_email( :key => params[:auth_key] )
+    user = User.find_by_email params[:auth_key]
     if user
       session[:user_id] = user.id
       redirect_to '/order_books'

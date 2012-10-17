@@ -33,13 +33,17 @@ end
 class Identity
   include CouchPotato::Persistence
   include OmniAuth::Identity::Models::CouchPotatoModule
-  include CouchHelpers
+  include Couch::InstanceMethods
 
   property :email
   property :password_digest
 
   def self.where search_hash
-    CouchPotato.database.view Identity.by_email(:key => search_hash)
+    Identity::find_by_email search_hash
+  end
+
+  def Identity::find_by_email email
+    CouchPotato.database.view Identity.by_email(:key => email)
   end
 
   view :by_email, :key => :email

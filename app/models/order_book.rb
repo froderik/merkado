@@ -1,6 +1,6 @@
 class OrderBook
   include CouchPotato::Persistence
-  include CouchHelpers
+  include Couch::InstanceMethods
 
   property :user_admin_id
   property :name
@@ -27,7 +27,15 @@ class OrderBook
     """
   end
 
-  view :by_name, :key => :user_admin_id
-  view :by_user, :key => :user_id, :map => order_books_by_userid_js, :type => :custom, :include_docs => true
+  def OrderBook::find_by_user_admin_id user_admin_id
+    CouchPotato.database.view OrderBook.by_user_admin_id( :key => user_admin_id )
+  end
+
+  def OrderBook::find_by_user_id user_id
+    CouchPotato.database.view OrderBook.by_user_id( :key => user_id )
+  end
+
+  view :by_user_admin_id, :key => :user_admin_id
+  view :by_user_id, :key => :user_id, :map => order_books_by_userid_js, :type => :custom, :include_docs => true
 
 end
