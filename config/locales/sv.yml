@@ -3,3 +3,6 @@ sv:
   heart:
     landing:
       sign_in: "Logga in"
+  layouts:
+    application:
+      sign_out: "Logga ut"  

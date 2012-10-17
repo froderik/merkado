@@ -3,3 +3,6 @@ en:
   heart:
     landing:
       sign_in: "Sign in"
+  layouts:
+    application:
+      sign_out: "Sign out"
