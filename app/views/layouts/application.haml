@@ -20,7 +20,7 @@
                 = link_to 'merkado', '/'
             .span2
               - if session[:user_id]
-                = link_to 'Sign out', 'sign_out'
+                = link_to t('.sign_out'), 'sign_out'
     #main{:role => "main"}
       .container
         .content
