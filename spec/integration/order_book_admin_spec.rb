@@ -13,4 +13,22 @@ feature 'as an order book admin I want to perform administrative tasks - ' do
 
     page.should have_content 'Gula'
   end
+
+  scenario 'invites', :js => true do
+    user = create_and_sign_in_user
+    order_book = create_order_book_with_admin user, 'Gott och blandat'
+
+    visit "/order_books/#{order_book.id}"
+    click_on 'Invite'
+    fill_in 'invite_email',        :with => 'p@s, f@r'
+    click_on 'Send'
+
+    p = CouchPotato.database.view Invite.by_email( :key => 'p@s' )
+    f = CouchPotato.database.view Invite.by_email( :key => 'f@r' )
+
+    p.should_not be_nil
+    f.should_not be_nil
+
+  end
+
 end

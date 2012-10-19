@@ -11,6 +11,7 @@ Merkado::Application.routes.draw do
   resources :order_books do
     member do
       put 'add_instrument'
+      put 'add_invite'
     end
   end
 

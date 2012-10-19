@@ -1,7 +1,7 @@
 %h1= @order_book.name
 
 - if session[:user_id] == @order_book.user_admin_id
-  %a(href="#add-instrument-modal" role="button" class="btn" data-toggle="modal")
+  %a(href="#add-instrument-modal" role="button" class="btn" id="add-instrument-button" data-toggle="modal")
     Add instrument
   .modal(id="add-instrument-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none")
     .modal-header
@@ -15,6 +15,19 @@
         = f.text_area  :description, :rows => 7
       .modal-footer
         = f.submit 'Save'
+
+  %a(href="#add-invite-modal" role="button" class="btn" id="add-invite-button" data-toggle="modal")
+    Invite
+  .modal(id="add-invite-modal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel" aria-hidden="true" style="display:none")
+    .modal-header
+      %h3 Add Invites
+    - add_invite_url = "/order_books/#{@order_book.id}/add_invite"
+    = form_for @new_invite, :url => add_invite_url, :remote => true, :method => :put do |f|
+      .modal-body
+        = f.label      :email
+        = f.text_field :email
+      .modal-footer
+        = f.submit 'Send'          
 
 .instrument_list
   - if @order_book.instrument_list

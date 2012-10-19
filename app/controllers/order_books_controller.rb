@@ -8,6 +8,7 @@ class OrderBooksController < ApplicationController
     @order_book = Couch.find_by_id params[:id]
     if session[:user_id] == @order_book.user_admin_id
       @new_instrument = Instrument.new
+      @new_invite = Invite.new
     end
   end
 
@@ -21,5 +22,11 @@ class OrderBooksController < ApplicationController
     @order_book.instrument_list = new_instrument_list
     @order_book.save
     render :partial => 'instrument_list', :locals => {:order_book => @order_book}, :content_type => 'text/plain'
+  end
+
+  def add_invite
+    invite  = Invite.new params[:email]
+    invite.consumed = false
+    render :nothing => true
   end
 end
