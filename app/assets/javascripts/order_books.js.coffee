@@ -5,7 +5,7 @@ load_instrument_list = (xhr, data, status) ->
 add_instrument_callback = () ->
   $('.new_instrument').bind('ajax:success', load_instrument_list)
 
-add_instrument_callback = () ->
+add_invite_callback = () ->
   $('.new_invite').bind('ajax:success', close_invite_modal)
 
 close_invite_modal = () ->
