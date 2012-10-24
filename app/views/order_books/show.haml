@@ -22,12 +22,12 @@
     .modal-header
       %h3 Add Invites
     - add_invite_url = "/order_books/#{@order_book.id}/add_invite"
-    = form_for @new_invite, :url => add_invite_url, :remote => true, :method => :put do |f|
+    = form_tag add_invite_url, :remote => true, :method => :put, :id => 'new_invites' do
       .modal-body
-        = f.label      :email
-        = f.text_field :email
+        = label_tag      :email_list
+        = text_field_tag :email_list
       .modal-footer
-        = f.submit 'Send'          
+        = submit_tag 'Send'          
 
 .instrument_list
   - if @order_book.instrument_list

@@ -3,10 +3,11 @@ class Invite
   include Couch::InstanceMethods
 
   property :email
-  property :consumed
+  property :consumed, :type => :boolean, :default => false
+  property :order_book_id
 
-  def User::find_by_email email
-    CouchPotato.database.first User.by_email( :key => email )
+  def Invite::find_by_email email
+    CouchPotato.database.first Invite.by_email( :key => email )
   end
 
   view :by_email, :key => :email

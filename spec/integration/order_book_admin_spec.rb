@@ -20,7 +20,7 @@ feature 'as an order book admin I want to perform administrative tasks - ' do
 
     visit "/order_books/#{order_book.id}"
     click_on 'Invite'
-    fill_in 'invite_email',        :with => 'p@s, f@r'
+    fill_in 'email_list',        :with => 'p@s, f@r'
     click_on 'Send'
 
     p = CouchPotato.database.view Invite.by_email( :key => 'p@s' )
@@ -28,6 +28,8 @@ feature 'as an order book admin I want to perform administrative tasks - ' do
 
     p.should_not be_nil
     f.should_not be_nil
+
+    find("#new_invites").should_not be_visible
 
   end
 

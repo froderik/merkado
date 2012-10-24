@@ -25,8 +25,11 @@ class OrderBooksController < ApplicationController
   end
 
   def add_invite
-    invite  = Invite.new params[:email]
-    invite.consumed = false
+    params[:email_list].split(",").each do | email |
+      invite = Invite.new :email => email, :order_book_id => params[:order_book_id] 
+      invite.save  
+    end
+
     render :nothing => true
   end
 end
