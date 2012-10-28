@@ -7,12 +7,19 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'helpers/user_helper'
 require 'helpers/order_book_helper'
+require 'helpers/mailer_macros'
+
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    reset_email
+  end 
+
   config.after :each do
     DatabaseCleaner.clean
   end
@@ -27,6 +34,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
 end
 
 Capybara.javascript_driver = :webkit
