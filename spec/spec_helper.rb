@@ -18,7 +18,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     reset_email
-  end 
+  end
 
   config.after :each do
     DatabaseCleaner.clean
@@ -36,5 +36,21 @@ RSpec.configure do |config|
   config.order = "random"
 
 end
+
+RSpec::Matchers.define :validate_presence_of_field do |field|
+  match do
+    setter = "#{field}=".to_sym
+    subject.send setter, nil
+    not subject.valid?
+  end
+
+  failure_message_for_should do
+    """
+the field #{field} is mandatory for #{subject.class.name} - |
+it should have 'validates :#{field}, :presence => true'
+    """
+  end
+end
+
 
 Capybara.javascript_driver = :webkit

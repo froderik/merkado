@@ -38,6 +38,8 @@ class Identity
   property :email
   property :password_digest
 
+  validates :email, :presence => true
+  validates :password_digest, :presence => true
   validates_with EmailUniquenessValidator
 
   def self.where search_hash

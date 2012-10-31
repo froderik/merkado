@@ -5,6 +5,7 @@ class User
   property :email
   property :locale
 
+  validates :email, :presence => true
   validates_with EmailUniquenessValidator
 
   def User::find_by_email email
