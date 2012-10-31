@@ -41,11 +41,11 @@ class Identity
   validates_with EmailUniquenessValidator
 
   def self.where search_hash
-    Identity::find_by_email search_hash
+    [Identity::find_by_email( search_hash )]
   end
 
   def Identity::find_by_email email
-    CouchPotato.database.view Identity.by_email(:key => email)
+    CouchPotato.database.first Identity.by_email(:key => email)
   end
 
   view :by_email, :key => :email

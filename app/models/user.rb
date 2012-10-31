@@ -8,7 +8,7 @@ class User
   validates_with EmailUniquenessValidator
 
   def User::find_by_email email
-    CouchPotato.database.view User.by_email( :key => email )
+    CouchPotato.database.first User.by_email( :key => email )
   end
 
   view :by_email, :key => :email
