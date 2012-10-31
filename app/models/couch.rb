@@ -4,6 +4,10 @@ module Couch
     def save
       CouchPotato.database.save_document self
     end
+
+    def destroy
+      CouchPotato.database.destroy_document self
+    end
   end
 
   # so you can do User.find_by_id id
