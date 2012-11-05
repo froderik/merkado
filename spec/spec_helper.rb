@@ -5,9 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'database_cleaner'
-require 'helpers/user_helper'
-require 'helpers/order_book_helper'
-require 'helpers/mailer_macros'
+Dir.glob( 'spec/helpers/*.rb' ).each { |file| require File.expand_path file }
 
 
 # Requires supporting ruby files with custom matchers and macros, etc,

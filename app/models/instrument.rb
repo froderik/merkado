@@ -4,4 +4,6 @@ class Instrument
 
   property :name
   property :description
+
+  validates :name, :presence => true
 end
