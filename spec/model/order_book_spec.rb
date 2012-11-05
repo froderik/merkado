@@ -20,4 +20,8 @@ describe OrderBook do
     subject.instrument_list.size.should == 1
     subject.instrument_list.first.name.should == default_instrument_name
   end
+
+  it 'should have a name' do
+    subject.should validate_presence_of_field :name
+  end
 end

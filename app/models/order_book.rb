@@ -7,6 +7,8 @@ class OrderBook
   property :user_ids, :type => [String]
   property :instrument_list, :type => [Instrument]
 
+  validates :name, :presence => true
+
   def admin= admin_user
     self.user_admin_id = admin_user.id
   end
