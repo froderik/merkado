@@ -1,3 +1,5 @@
+require 'common_validators'
+
 module OmniAuth
   module Identity
     module Models
