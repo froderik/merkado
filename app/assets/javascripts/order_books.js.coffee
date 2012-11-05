@@ -11,9 +11,21 @@ add_invite_callback = () ->
 close_invite_modal = () ->
   $('#add-invite-modal').modal('hide') 
 
+email_list_listener = () ->
+  $('#email_list').keyup(validate_email_list)
+
+validate_email_list = () ->
+  email_list = $('#email_list').val()
+  is_correct_format = email_list.split(',').every (x)-> x.length == 0 or /.+@.+\..+/.test(x.trim())
+  if is_correct_format 
+    $('#send_invites_button').removeAttr('disabled')
+  else
+    $('#send_invites_button').attr('disabled', 'disabled')
+
 $ ->
   add_instrument_callback()
   add_invite_callback()
+  email_list_listener()
 
 #jquery document ready
 

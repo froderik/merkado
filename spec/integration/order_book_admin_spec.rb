@@ -20,16 +20,16 @@ feature 'as an order book admin I want to perform administrative tasks - ' do
 
     visit "/order_books/#{order_book.id}"
     click_on 'Invite'
-    fill_in 'email_list',        :with => 'p@s'
+    fill_in 'email_list',        :with => 'p@s.s, f@r.r'
     click_on 'Send'
 
-    p = CouchPotato.database.view Invite.by_email( :key => 'p@s' )
+    p = CouchPotato.database.view Invite.by_email( :key => 'p@s.s' )
 
     p.should_not be_nil
      
-    find("#new_invites").should_not be_visible
+    wait_until { !find("#new_invites").visible? }
 
-    last_email.to.should include('p@s') 
+    last_email.to.should include('f@r.r') 
   end
 
 end

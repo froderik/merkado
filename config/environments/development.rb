@@ -42,8 +42,8 @@ Merkado::Application.configure do
   :address              => "smtp.gmail.com",
   :port                 => 587,
   :domain               => 'example.com',
-  :user_name            => 'username',
-  :password             => 'password',
+  :user_name            => 'pskiden',
+  :password             => 'Kauai2012!',
   :authentication       => 'plain',
   :enable_starttls_auto => true }
 
