@@ -16,19 +16,16 @@ class OrderBooksController < ApplicationController
     @order_book = Couch.find_by_id params[:id]
     instrument = Instrument.new params[:instrument]
     instrument.save
-    instrument_list = @order_book.instrument_list || []
-    new_instrument_list = Array.new instrument_list # have to create a new array to trigger save
-    new_instrument_list << instrument
-    @order_book.instrument_list = new_instrument_list
+    @order_book.add_instrument instrument
     @order_book.save
     render :partial => 'instrument_list', :locals => {:order_book => @order_book}, :content_type => 'text/plain'
   end
 
   def add_invite
     params[:email_list].split(",").each do | email |
-      invite = Invite.new :email => email, :order_book_id => params[:order_book_id] 
+      invite = Invite.new :email => email, :order_book_id => params[:order_book_id]
       invite.save
-      InvitationMailer.invitation_email(invite).deliver  
+      InvitationMailer.invitation_email(invite).deliver
     end
 
     render :nothing => true

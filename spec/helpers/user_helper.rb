@@ -1,3 +1,6 @@
+def default_email;    'default@eldfluga.se' ; end
+def default_password; 's3cret'              ; end
+
 def create_identity email, password
   identity = Identity.new
   identity.email = email
@@ -6,7 +9,7 @@ def create_identity email, password
   identity
 end
 
-def create_user email, password
+def create_user email = default_email, password = default_password
   create_identity email, password
   user = User.new
   user.email = email

@@ -15,6 +15,13 @@ class OrderBook
     self.user_ids ? self.user_ids << user.id : self.user_ids = [user.id]
   end
 
+  def add_instrument instrument
+    self.instrument_list ||= []
+    new_instrument_list = Array.new self.instrument_list # have to create a new array to trigger save
+    new_instrument_list << instrument
+    self.instrument_list = new_instrument_list
+  end
+
   def self.order_books_by_userid_js
     """
     function(doc) {

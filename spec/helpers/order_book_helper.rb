@@ -9,8 +9,14 @@ def create_order_book_with_admin admin, name = 'Gott och blandat med admin'
   order_book
 end
 
-def add user, order_book
-  order_book.add_user user
+def add thing, order_book
+  if thing.is_a? User
+    order_book.add_user thing
+  elsif thing.is_a? Instrument
+    order_book.add_instrument thing
+  else
+    raise "Can't add things of the type #{thing.class}"
+  end
   order_book.save
 end
 
