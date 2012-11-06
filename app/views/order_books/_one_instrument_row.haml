@@ -1,4 +1,5 @@
 - bid ||= bid
+- offer ||= offer
 %tr
   %td
     = instrument.name if first
@@ -6,7 +7,15 @@
     - if first
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"bid-button", 'data-toggle'=>"modal"}
         Bid
-  %td
+  %td.bid_volume
     = bid.volume if bid
-  %td
+  %td.bid_price
     = bid.price if bid
+  %td.offer_price
+    = offer.price if offer
+  %td.offer_volume
+    = offer.volume if offer
+  %td
+    - if first
+      %a{ :href=>"#offer-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"offer-button", 'data-toggle'=>"modal"}
+        Offer

@@ -17,7 +17,7 @@ Merkado::Application.routes.draw do
 
   resources :instruments do
     member do
-      put 'place_bid'
+      put 'place_order'
     end
   end
 

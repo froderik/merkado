@@ -4,4 +4,7 @@ class Order
 
   property :price, :type => Float
   property :volume, :type => Float
+
+  Order::BID = 'bid'
+  Order::OFFER = 'offer'
 end

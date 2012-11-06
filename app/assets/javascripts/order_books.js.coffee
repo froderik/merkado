@@ -15,10 +15,10 @@ close_invite_modal = () ->
 
 # callback after placing an order
 load_instrument = (xhr, data, status) ->
-  alert('loading')
   instrument_id = $(this).attr('instrument_id')
   $('#' + instrument_id).html(data)
   $('#bid-' + instrument_id + '-modal').modal('hide')
+  $('#offer-' + instrument_id + '-modal').modal('hide')
 
 place_order_callback = () ->
   $('.place_order').bind('ajax:success', load_instrument)

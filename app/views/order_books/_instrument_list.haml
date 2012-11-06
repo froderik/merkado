@@ -2,16 +2,5 @@
 - if instrument_list
   - instrument_list.each do |one_instrument|
     = render :partial => 'instrument', :locals => {:instrument => one_instrument}
-    .modal{ :id => "bid-#{one_instrument.id}-modal", :tabindex => 1, :role => 'dialog', :style => 'display:none', |
-            'aria-labelledby' => 'bidModalLabel', 'aria-hidden' => 'true' }
-      .modal-header
-        %h3 Bid
-      - place_bid_url = "/instruments/#{one_instrument.id}/place_bid"
-      = form_tag place_bid_url, :remote => true, :method => :put, :class => 'place_order', :instrument_id => "#{one_instrument.id}" do |f|
-        .modal-body
-          = label_tag :price
-          = text_field_tag :price
-          = label_tag :volume
-          = text_field_tag :volume
-        .modal-footer
-          = submit_tag 'Place'
+    = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::BID}
+    = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::OFFER}

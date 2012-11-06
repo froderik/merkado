@@ -1,6 +1,10 @@
+- bids = instrument.bids || []
+- offers = instrument.offers || []
+- number_of_rows = [bids.size, offers.size].max
 %table.table.instrument{:id => "#{instrument.id}"}
-  - if instrument.bids.nil? or instrument.bids.empty?
-    = render :partial => 'order_books/one_instrument_row', :locals => {:instrument => instrument, :first => true}
-  - else
-    - instrument.bids.each_with_index do |one_bid, index|
-      = render :partial => 'order_books/one_instrument_row', :locals => {:instrument => instrument, :first => (index == 0), :bid => one_bid}
+  - if number_of_rows == 0
+    - locals = {:instrument => instrument, :first => true}
+    = render :partial => 'order_books/one_instrument_row', :locals => locals
+  - (0...number_of_rows).each do |row|
+    - locals = {:instrument => instrument, :first => (row == 0), :bid => bids[row], :offer => offers[row]}
+    = render :partial => 'order_books/one_instrument_row', :locals => locals

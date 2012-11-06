@@ -1,0 +1,15 @@
+.modal{ :id => "#{type}-#{one_instrument.id}-modal", :tabindex => 1, :role => 'dialog', :style => 'display:none', |
+        'aria-labelledby' => "#{type}ModalLabel", 'aria-hidden' => 'true' }
+  .modal-header
+    %h3
+      = type.capitalize
+  - order_url = "/instruments/#{one_instrument.id}/place_order"
+  = form_tag order_url, :remote => true, :method => :put, :class => 'place_order', :instrument_id => "#{one_instrument.id}" do |f|
+    .modal-body
+      = label_tag :price
+      = text_field_tag :price
+      = label_tag :volume
+      = text_field_tag :volume
+      = hidden_field_tag :type, type
+    .modal-footer
+      = submit_tag 'Place'
