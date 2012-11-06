@@ -15,6 +15,12 @@ Merkado::Application.routes.draw do
     end
   end
 
+  resources :instruments do
+    member do
+      put 'place_bid'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

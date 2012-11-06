@@ -9,8 +9,7 @@ end
 
 describe Couch do
   before do
-    @doc = DummyDocument.new
-    @doc.value = 'a value'
+    @doc = DummyDocument.new :value => 'a value'
     @doc.save
   end
 
@@ -22,5 +21,12 @@ describe Couch do
   it 'should destroy' do
     @doc.destroy
     @doc.id.should be_nil
+  end
+
+  it 'should find several by id' do
+    other = DummyDocument.new :value => 'another value'
+    other.save
+    two = Couch.find_by_id [other.id, @doc.id]
+    two.size.should == 2
   end
 end

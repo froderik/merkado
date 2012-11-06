@@ -27,8 +27,7 @@
         = label_tag      :email_list
         = text_field_tag :email_list
       .modal-footer
-        = submit_tag 'Send', :disabled => true, :id => 'send_invites_button'         
+        = submit_tag 'Send', :disabled => true, :id => 'send_invites_button'
 
 .instrument_list
-  - if @order_book.instrument_list
-    = render :partial => 'instrument_list', :locals => {:order_book => @order_book}
+  = render :partial => 'instrument_list', :locals => {:order_book => @order_book}

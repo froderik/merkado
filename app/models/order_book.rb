@@ -5,7 +5,7 @@ class OrderBook
   property :user_admin_id
   property :name
   property :user_ids, :type => [String]
-  property :instrument_list, :type => [Instrument]
+  property :instrument_ids, :type => [String]
 
   validates :name, :presence => true
 
@@ -15,13 +15,17 @@ class OrderBook
 
   def add_user user
     self.user_ids ? self.user_ids << user.id : self.user_ids = [user.id]
+    self.is_dirty
   end
 
   def add_instrument instrument
-    self.instrument_list ||= []
-    new_instrument_list = Array.new self.instrument_list # have to create a new array to trigger save
-    self.instrument_list << instrument
-    #self.instrument_list = new_instrument_list
+    self.instrument_ids ||= []
+    self.instrument_ids << instrument.id
+    self.is_dirty
+  end
+
+  def instrument_list
+    instrument_ids ? Couch.find_by_id( instrument_ids ) : []
   end
 
   def self.order_books_by_userid_js

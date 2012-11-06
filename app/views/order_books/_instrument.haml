@@ -1,0 +1,6 @@
+%table.table.instrument{:id => "#{instrument.id}"}
+  - if instrument.bids.nil? or instrument.bids.empty?
+    = render :partial => 'order_books/one_instrument_row', :locals => {:instrument => instrument, :first => true}
+  - else
+    - instrument.bids.each_with_index do |one_bid, index|
+      = render :partial => 'order_books/one_instrument_row', :locals => {:instrument => instrument, :first => (index == 0), :bid => one_bid}
