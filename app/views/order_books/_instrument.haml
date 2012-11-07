@@ -1,7 +1,7 @@
 - bids = instrument.bids || []
 - offers = instrument.offers || []
 - number_of_rows = [bids.size, offers.size].max
-%table.table.instrument{:id => "#{instrument.id}"}
+%table.table
   - if number_of_rows == 0
     - locals = {:instrument => instrument, :first => true}
     = render :partial => 'order_books/one_instrument_row', :locals => locals
