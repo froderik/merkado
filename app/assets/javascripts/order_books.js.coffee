@@ -23,6 +23,20 @@ load_instrument = (xhr, data, status) ->
 place_order_callback = () ->
   $('.place_order').bind('ajax:success', load_instrument)
 
+# price and volume validator
+validate_order = () ->
+  order_form = $(this).closest('form')
+  price = order_form.find('.price_input').val()
+  volume = order_form.find('.volume_input').val()
+  if price and volume and price > 0 and volume > 0
+    $('#place_order_button').removeAttr('disabled')
+  else
+    $('#place_order_button').attr('disabled', 'disabled')
+
+place_order_enabler = () ->
+  $('.price_input').keyup(validate_order)
+  $('.volume_input').keyup(validate_order)
+
 # email validation
 add_email_list_listener = () ->
   $('#email_list').keyup(validate_email_list)
@@ -41,3 +55,4 @@ $ ->
   add_invite_callback()
   add_email_list_listener()
   place_order_callback()
+  place_order_enabler()
