@@ -26,12 +26,13 @@ place_order_callback = () ->
 # price and volume validator
 validate_order = () ->
   order_form = $(this).closest('form')
+  place_button = order_form.find('.place_order_button')
   price = order_form.find('.price_input').val()
   volume = order_form.find('.volume_input').val()
   if price and volume and price > 0 and volume > 0
-    $('#place_order_button').removeAttr('disabled')
+    place_button.removeAttr('disabled')
   else
-    $('#place_order_button').attr('disabled', 'disabled')
+    place_button.attr('disabled', 'disabled')
 
 place_order_enabler = () ->
   $('.price_input').keyup(validate_order)
