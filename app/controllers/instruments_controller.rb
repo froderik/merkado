@@ -9,4 +9,9 @@ class InstrumentsController < ApplicationController
     instrument.save
     render :partial => 'order_books/instrument', :locals => {:instrument => instrument}, :content_type => 'text/plain'
   end
+
+  def show
+    instrument = Couch.find_by_id params[:id]
+    render :partial => 'order_books/instrument', :locals => {:instrument => instrument}, :content_type => 'text/plain'
+  end
 end

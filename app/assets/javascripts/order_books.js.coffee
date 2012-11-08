@@ -14,14 +14,14 @@ close_invite_modal = () ->
   $('#add-invite-modal').modal('hide')
 
 # callback after placing an order
-load_instrument = (xhr, data, status) ->
+order_placed_succesfully = (xhr, data, status) ->
   instrument_id = $(this).attr('instrument_id')
   $('#' + instrument_id).html(data)
   $('#bid-' + instrument_id + '-modal').modal('hide')
   $('#offer-' + instrument_id + '-modal').modal('hide')
 
 place_order_callback = () ->
-  $('.place_order').bind('ajax:success', load_instrument)
+  $('.place_order').bind('ajax:success', order_placed_succesfully)
 
 # price and volume validator
 validate_order = () ->
@@ -50,6 +50,17 @@ validate_email_list = () ->
   else
     $('#send_invites_button').attr('disabled', 'disabled')
 
+# reload instruments regularly
+setup_instrument_reloader = () ->
+  setInterval(load_instruments, 5000);
+
+load_instruments = () ->
+  $('.instrument').each(load_one_instrument)
+
+load_one_instrument = () ->
+  id = $(this).attr('id')
+  $.get('/instruments/' + id, (data) -> $('#' + id).html(data))
+
 # document.ready
 $ ->
   add_instrument_list_callback()
@@ -57,3 +68,4 @@ $ ->
   add_email_list_listener()
   place_order_callback()
   place_order_enabler()
+  setup_instrument_reloader()
