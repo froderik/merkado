@@ -1,3 +1,5 @@
+require 'common_validators'
+
 class User
   include CouchPotato::Persistence
   include Couch::InstanceMethods

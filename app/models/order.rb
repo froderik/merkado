@@ -8,4 +8,8 @@ class Order
 
   Order::BID = 'bid'
   Order::OFFER = 'offer'
+
+  def timestamp
+    created_at
+  end
 end

@@ -15,6 +15,7 @@ describe Instrument do
     subject.bids.first.price.should == 123.45
     subject.bids.first.volume.should == 1000
     subject.bids.first.user_id.should == user.id
+    subject.bids.first.timestamp.should_not be_nil
   end
 
   it 'should add offers' do
@@ -24,6 +25,7 @@ describe Instrument do
     subject.offers.first.price.should == 4711
     subject.offers.first.volume.should == 1.235
     subject.offers.first.user_id.should == user.id
+    subject.offers.first.timestamp.should_not be_nil
   end
 
 end
