@@ -7,18 +7,23 @@
     - if first
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"bid-button", 'data-toggle'=>"modal"}
         Bid
+
   - bid_styling = ''
   - bid_styling = 'mine' if bid and bid.user_id == @user.id
-  %td.bid_volume{:class => bid_styling}
-    = bid.volume if bid
-  %td.bid_price{:class => bid_styling}
-    = bid.price if bid
+  %td{:class => bid_styling}
+    %span.bid_volume.number
+      = bid.volume if bid
+    %span.bid_price.number
+      = bid.price if bid
+
   - offer_styling = ''
   - offer_styling = 'mine' if offer and offer.user_id == @user.id
-  %td.offer_price{:class => offer_styling}
-    = offer.price if offer
-  %td.offer_volume{:class => offer_styling}
-    = offer.volume if offer
+  %td{:class => offer_styling}
+    %span.offer_price.number
+      = offer.price if offer
+    %span.offer_volume.number
+      = offer.volume if offer
+
   %td
     - if first
       %a{ :href=>"#offer-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"offer-button", 'data-toggle'=>"modal"}
