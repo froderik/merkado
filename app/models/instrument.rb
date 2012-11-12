@@ -9,16 +9,16 @@ class Instrument
 
   validates :name, :presence => true
 
-  def add_bid price, volume = 1
-    new_order = Order.new :price => price.to_f, :volume => volume.to_f
+  def add_bid user_id, price, volume = 1
+    new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id
     self.bids ||= []
     self.bids << new_order
     self.bids.sort! { |one, other| other.price <=> one.price }
     self.is_dirty
   end
 
-  def add_offer price, volume = 1
-    new_order = Order.new :price => price.to_f, :volume => volume.to_f
+  def add_offer user_id, price, volume = 1
+    new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id
     self.offers ||= []
     self.offers << new_order
     self.offers.sort! { |one, other| one.price <=> other.price }

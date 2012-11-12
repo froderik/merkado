@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
 
 	def set_locale
     if session[:user_id]
-      user = Couch.find_by_id session[:user_id]
-  	  I18n.locale = user.locale || I18n.default_locale
+      @user = Couch.find_by_id session[:user_id]
+  	  I18n.locale = @user.locale || I18n.default_locale
     else
       I18n.locale = I18n.default_locale
     end

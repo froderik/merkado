@@ -4,6 +4,7 @@ class Order
 
   property :price, :type => Float
   property :volume, :type => Float
+  property :user_id
 
   Order::BID = 'bid'
   Order::OFFER = 'offer'
