@@ -2,7 +2,6 @@
 - offer ||= offer
 %tr
   %td
-    = instrument.name if first
   %td
     - if first
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"bid-button", 'data-toggle'=>"modal"}
