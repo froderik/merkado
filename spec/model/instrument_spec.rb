@@ -10,7 +10,6 @@ describe Instrument do
 
   it 'should add bids' do
     subject.add_bid user.id, 123.45, 1000
-    subject.save
     subject.bids.size.should == 1
     subject.bids.first.price.should == 123.45
     subject.bids.first.volume.should == 1000
@@ -20,12 +19,14 @@ describe Instrument do
 
   it 'should add offers' do
     subject.add_offer user.id, 4711, 1.235
-    subject.save
     subject.offers.size.should == 1
     subject.offers.first.price.should == 4711
     subject.offers.first.volume.should == 1.235
     subject.offers.first.user_id.should == user.id
     subject.offers.first.timestamp.should_not be_nil
+  end
+
+  it 'should match orders' do
   end
 
 end

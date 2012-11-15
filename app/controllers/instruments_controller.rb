@@ -6,7 +6,6 @@ class InstrumentsController < ApplicationController
     elsif params[:type] == Order::OFFER
       instrument.add_offer @user.id, params[:price], params[:volume]
     end
-    instrument.save
     render :partial => 'order_books/instrument', :locals => {:instrument => instrument}, :content_type => 'text/plain'
   end
 

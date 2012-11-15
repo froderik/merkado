@@ -14,7 +14,8 @@ class Instrument
     self.bids ||= []
     self.bids << new_order
     self.bids.sort! { |one, other| other.price <=> one.price }
-    self.is_dirty
+    match_orders
+    save
   end
 
   def add_offer user_id, price, volume = 1
@@ -22,6 +23,20 @@ class Instrument
     self.offers ||= []
     self.offers << new_order
     self.offers.sort! { |one, other| one.price <=> other.price }
-    self.is_dirty
+    match_orders
+    save
+  end
+
+  def match_orders
+    self.bids, self.offers, trades = Instrument::match_orders(bids, offers)
+    add_trades trades
+  end
+
+  def add_trades trades
+    trades.each {|one_trade| one_trade.save }
+  end
+
+  def self.match_orders bids, offers
+    [bids, offers, []]
   end
 end
