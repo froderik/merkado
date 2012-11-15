@@ -21,6 +21,14 @@ class Order
     Order.format volume, decimals
   end
 
+  def price_decimals_count
+    price.to_s =~ /.0$/ ? 0 : price.to_s.split('.')[1].size
+  end
+
+  def volume_decimals_count
+    volume.to_s =~ /.0$/ ? 0 : volume.to_s.split('.')[1].size
+  end
+
   def self.format number, decimals = 0
     sprintf "%.#{decimals}f", number
   end

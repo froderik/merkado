@@ -19,7 +19,7 @@ feature 'as an order book user I want to place bids and offers - ' do
     fill_in 'volume', :with => "100"
     click_on 'Place'
     page.find( '.bid_price', :text => "125.43" ).should_not be_nil
-    page.find( '.bid_volume', :text => "100.0" ).should_not be_nil
+    page.find( '.bid_volume', :text => "100" ).should_not be_nil
   end
 
   scenario 'place an offer', :js => true do
@@ -32,7 +32,7 @@ feature 'as an order book user I want to place bids and offers - ' do
     fill_in 'volume', :with => "300"
     click_on 'Place'
     page.find( '.offer_price', :text => "225.43" ).should_not be_nil
-    page.find( '.offer_volume', :text => "300.0" ).should_not be_nil
+    page.find( '.offer_volume', :text => "300" ).should_not be_nil
   end
 
 

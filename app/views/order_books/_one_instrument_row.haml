@@ -10,18 +10,20 @@
   - bid_styling = ''
   - bid_styling = 'mine' if bid and bid.user_id == @user.id
   %td{:class => bid_styling}
-    %span.bid_volume.number
-      = bid.volume if bid
-    %span.bid_price.number
-      = bid.price if bid
+    .bid_volume.number
+      = bid.formatted_volume( volume_decimals ) if bid
+  %td{:class => bid_styling}
+    .bid_price.number
+      = bid.formatted_price( price_decimals ) if bid
 
   - offer_styling = ''
   - offer_styling = 'mine' if offer and offer.user_id == @user.id
   %td{:class => offer_styling}
-    %span.offer_price.number
-      = offer.price if offer
-    %span.offer_volume.number
-      = offer.volume if offer
+    .offer_price.number
+      = offer.formatted_price( price_decimals ) if offer
+  %td{:class => offer_styling}
+    .offer_volume.number
+      = offer.formatted_volume( volume_decimals ) if offer
 
   %td
     - if first

@@ -11,6 +11,14 @@ describe Order do
     subject.formatted_price.should == '100'
   end
 
+  it 'should count decimals' do
+    subject.volume_decimals_count.should == 0
+    subject.price_decimals_count.should == 0
+    nother = Order.new :volume => 12.345, :price => 14.1
+    nother.volume_decimals_count.should == 3
+    nother.price_decimals_count.should == 1
+  end
+
   it 'should format numbers' do
     assert_formatted_number 100, nil, '100'
     assert_formatted_number 100, 0, '100'
