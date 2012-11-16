@@ -22,11 +22,15 @@ class Order
   end
 
   def price_decimals_count
-    price.to_s =~ /.0$/ ? 0 : price.to_s.split('.')[1].size
+    count_decimals price
   end
 
   def volume_decimals_count
-    volume.to_s =~ /.0$/ ? 0 : volume.to_s.split('.')[1].size
+    count_decimals volume
+  end
+
+  def count_decimals floater
+    floater.to_s =~ /.0$/ ? 0 : floater.to_s.split('.')[1].size
   end
 
   def self.format number, decimals = 0
