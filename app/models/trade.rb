@@ -7,6 +7,10 @@ class Trade
   property :price, :type => Float
   property :volume, :type => Float
 
+  def timestamp
+    created_at
+  end
+
   def seller
     offer.user_id
   end

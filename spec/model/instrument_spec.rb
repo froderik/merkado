@@ -37,6 +37,7 @@ describe Instrument do
     trades.first.volume.should == 10
     trades.first.seller.should == offers.first.user_id
     trades.first.buyer.should  == bids.first.user_id
+    trades.first.timestamp.should_not be_nil
 
     new_bids.size.should == 1
     new_bids.first.price.should == 90

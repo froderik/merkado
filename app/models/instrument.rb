@@ -47,12 +47,12 @@ class Instrument
       [bids, offers, []]
     elsif first_bid.price >= first_offer.price
       volume = [first_bid.volume, first_offer.volume].min
-      price = first_bid.price
+      price = (first_bid.price + first_offer.price) / 2
 
       trade_bid,   bids   = order_with_volume volume, bids
       trade_offer, offers = order_with_volume volume, offers
 
-      trade = Trade.new :bid => trade_bid, :offer => trade_offer, :volume => volume, :price => price
+      trade = Trade.new :bid => trade_bid, :offer => trade_offer, :volume => volume, :price => price, :created_at => Time.zone.now
       bids, offers, trades = match_orders bids, offers
       trades << trade
       [bids, offers, trades]
