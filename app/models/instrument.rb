@@ -41,11 +41,13 @@ class Instrument
   end
 
   def self.match_orders bids, offers
-    if bids.empty? or offers.empty?
+    first_bid = bids.first
+    first_offer = offers.first
+    if not (first_bid and first_offer)
       [bids, offers, []]
-    elsif bids.first.price >= offers.first.price
-      volume = bids.first.volume
-      price = bids.first.price
+    elsif first_bid.price >= first_offer.price
+      volume = first_bid.volume
+      price = first_bid.price
       trade = Trade.new :bid => bids.shift, :offer => offers.shift, :volume => volume, :price => price
       bids, offers, trades = match_orders bids, offers
       trades << trade
