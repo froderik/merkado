@@ -47,7 +47,9 @@ class Instrument
       volume = bids.first.volume
       price = bids.first.price
       trade = Trade.new :bid => bids.shift, :offer => offers.shift, :volume => volume, :price => price
-      [bids, offers, [trade]]
+      bids, offers, trades = match_orders bids, offers
+      trades << trade
+      [bids, offers, trades]
     else
       [bids, offers, []]
     end

@@ -45,6 +45,17 @@ describe Instrument do
     new_offers.first.price.should == 110
   end
 
+  it 'should match orders deeply' do
+    bids =   orders [110, 10], [100, 10], [90, 10]
+    offers = orders [100, 10], [100, 10], [110, 10]
+
+    new_bids, new_offers, trades = Instrument.match_orders bids, offers
+
+    new_bids.size.should == 1
+    new_offers.size.should == 1
+    trades.size.should == 2
+  end
+
   def orders *price_volume_tuples
     user_id = rand( 100000000000 ).to_s
 
