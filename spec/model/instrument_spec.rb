@@ -56,6 +56,24 @@ describe Instrument do
     trades.size.should == 2
   end
 
+  it 'should match part of volumes' do
+    bids =   orders [100, 20], [90, 10]
+    offers = orders [100, 5], [110, 10]
+
+    new_bids, new_offers, trades = Instrument.match_orders bids, offers
+
+    new_bids.size.should == 2
+    new_bids.first.volume.should == 15
+    new_bids.first.price.should == 100
+
+    new_offers.size.should == 1
+    new_offers.first.price.should == 110
+
+    trades.size.should == 1
+    trades.first.volume.should == 5
+    trades.first.price.should == 100
+  end
+
   def orders *price_volume_tuples
     user_id = rand( 100000000000 ).to_s
 

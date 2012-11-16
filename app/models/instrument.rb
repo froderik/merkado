@@ -46,14 +46,28 @@ class Instrument
     if not (first_bid and first_offer)
       [bids, offers, []]
     elsif first_bid.price >= first_offer.price
-      volume = first_bid.volume
+      volume = [first_bid.volume, first_offer.volume].min
       price = first_bid.price
-      trade = Trade.new :bid => bids.shift, :offer => offers.shift, :volume => volume, :price => price
+
+      trade_bid,   bids   = order_with_volume volume, bids
+      trade_offer, offers = order_with_volume volume, offers
+
+      trade = Trade.new :bid => trade_bid, :offer => trade_offer, :volume => volume, :price => price
       bids, offers, trades = match_orders bids, offers
       trades << trade
       [bids, offers, trades]
     else
       [bids, offers, []]
+    end
+  end
+
+  def self.order_with_volume volume, orders
+    if orders.first.volume == volume
+      new_order = orders.shift
+      [new_order, orders]
+    elsif orders.first.volume > volume
+      orders.first.volume -= volume
+      [orders.first, orders]
     end
   end
 end
