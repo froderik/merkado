@@ -12,18 +12,22 @@ class Instrument
   def add_bid user_id, price, volume = 1
     new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id, :created_at => Time.zone.now
     self.bids ||= []
+    self.offers ||= []
     self.bids << new_order
     self.bids.sort! { |one, other| other.price <=> one.price }
     match_orders
+    self.is_dirty
     save
   end
 
   def add_offer user_id, price, volume = 1
     new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id, :created_at => Time.zone.now
+    self.bids ||= []
     self.offers ||= []
     self.offers << new_order
     self.offers.sort! { |one, other| one.price <=> other.price }
     match_orders
+    self.is_dirty
     save
   end
 
@@ -37,6 +41,15 @@ class Instrument
   end
 
   def self.match_orders bids, offers
-    [bids, offers, []]
+    if bids.empty? or offers.empty?
+      [bids, offers, []]
+    elsif bids.first.price >= offers.first.price
+      volume = bids.first.volume
+      price = bids.first.price
+      trade = Trade.new :bid => bids.shift, :offer => offers.shift, :volume => volume, :price => price
+      [bids, offers, [trade]]
+    else
+      [bids, offers, []]
+    end
   end
 end

@@ -26,7 +26,30 @@ describe Instrument do
     subject.offers.first.timestamp.should_not be_nil
   end
 
-  it 'should match orders' do
+  it 'should match orders with same volume' do
+    bids =   orders [100, 10], [90, 10]
+    offers = orders [100, 10], [110, 10]
+
+    new_bids, new_offers, trades = Instrument.match_orders bids, offers
+
+    trades.size.should         == 1
+    trades.first.price.should  == 100
+    trades.first.volume.should == 10
+    trades.first.seller.should == offers.first.user_id
+    trades.first.buyer.should  == bids.first.user_id
+
+    new_bids.size.should == 1
+    new_bids.first.price.should == 90
+
+    new_offers.size.should == 1
+    new_offers.first.price.should == 110
   end
 
+  def orders *price_volume_tuples
+    user_id = rand( 100000000000 ).to_s
+
+    price_volume_tuples.map do |one_tuple|
+      Order.new :price => one_tuple[0], :volume => one_tuple[1], :user_id => user_id
+    end
+  end
 end
