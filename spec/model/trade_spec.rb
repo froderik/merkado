@@ -12,4 +12,12 @@ describe Trade do
     subject.should validate_presence_of_field :offer
     subject.should validate_presence_of_field :instrument_id
   end
+
+  it "should be found by instrument" do
+    Couch.find_by_id subject.id # waiting for mapping to occur....
+
+    trades = Trade.find_by_instrument_id( 'nonsense' )
+    trades.size.should == 1
+    trades.first.id.should == subject.id
+  end
 end

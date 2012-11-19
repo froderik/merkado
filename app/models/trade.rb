@@ -25,4 +25,10 @@ class Trade
   def buyer
     bid.user_id
   end
+
+  def self.find_by_instrument_id instrument_id
+    CouchPotato.database.view self.by_instrument_id( :key => instrument_id )
+  end
+
+  view :by_instrument_id, :key => :instrument_id
 end
