@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Order do
-  subject { Order.new :volume => 1000, :price => 100 }
+  subject { create_order }
 
   it 'should format volume' do
     subject.formatted_volume.should == '1000'
