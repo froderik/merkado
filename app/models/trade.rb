@@ -30,5 +30,23 @@ class Trade
     CouchPotato.database.view self.by_instrument_id( :key => instrument_id )
   end
 
+  def self.find_by_buyer_id buyer_id
+    CouchPotato.database.view self.by_buyer_id( :key => buyer_id )
+  end
+
+  def self.find_by_seller_id seller_id
+    CouchPotato.database.view self.by_seller_id( :key => seller_id )
+  end
+
+  def self.trades_by_user_js kind
+    """
+    function(doc) {
+      emit(doc['#{kind}']['user_id'], 1);
+    }
+    """
+  end
+
   view :by_instrument_id, :key => :instrument_id
+  view :by_buyer_id, :map => trades_by_user_js( 'bid' ), :type => :custom, :include_docs => true
+  view :by_seller_id, :map => trades_by_user_js( 'offer' ), :type => :custom, :include_docs => true
 end

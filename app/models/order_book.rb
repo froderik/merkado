@@ -33,7 +33,7 @@ class OrderBook
     function(doc) {
       doc.user_ids.forEach(
         function(one_user_id){
-          emit(one_user_id, doc);
+          emit(one_user_id, 1);
         }
       );
     }
@@ -49,6 +49,6 @@ class OrderBook
   end
 
   view :by_user_admin_id, :key => :user_admin_id
-  view :by_user_id, :key => :user_id, :map => order_books_by_userid_js, :type => :custom, :include_docs => true
+  view :by_user_id, :map => order_books_by_userid_js, :type => :custom, :include_docs => true
 
 end

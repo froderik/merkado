@@ -20,4 +20,15 @@ describe Trade do
     trades.size.should == 1
     trades.first.id.should == subject.id
   end
+
+  it "should be found by user" do
+    Couch.find_by_id subject.id # waiting for mapping to occur....
+    sleep 1
+
+    trades_bought = Trade.find_by_buyer_id dummy_user_id
+    trades_bought.first.id.should == subject.id
+
+    trades_sold = Trade.find_by_seller_id dummy_user_id
+    trades_sold.first.id.should == subject.id
+  end
 end

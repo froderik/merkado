@@ -10,7 +10,7 @@ module Couch
     end
   end
 
-  # so you can do User.find_by_id id
+  # so you can do Couch.find_by_id id
   def self.find_by_id id
     CouchPotato.database.load id
   end
