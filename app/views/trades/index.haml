@@ -1,14 +1,19 @@
 %table.table-striped
+  %tr.top_header_row
+    %th.instrument_name{ :colspan => 3 }= "All trades in #{@instrument.name}"
   %tr
-    %th
-      Time
-    %th
-      Price
-    %th
-      Volume
+    %th.number_header
+      time
+    %th.number_header
+      price
+    %th.number_header
+      volume
   - @trades.each do |trade|
     %tr.trade
-      %td= trade.timestamp
-      %td= trade.price
-      %td= trade.volume
+      %td
+        .number= trade.timestamp
+      %td
+        .number= trade.price
+      %td
+        .number= trade.volume
 
