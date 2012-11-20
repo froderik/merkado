@@ -5,7 +5,7 @@
 - price_decimals = (bids + offers).map { |order| order.price_decimals_count } .max
 %table.table-striped
   %tr.top_header_row
-    %th.instrument_name(colspan=6)= instrument.name
+    %th.instrument_name{ :colspan => 6 }= instrument.name
     %th= link_to 'trades', "/trades?instrument_id=#{instrument.id}"
   %tr
     %th
