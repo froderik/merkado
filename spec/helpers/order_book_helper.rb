@@ -14,10 +14,10 @@ def create_order_book_with_one_instrument_traded_three_times admin
   instrument = create_instrument 'Godis'
   add instrument, order_book
   instrument.add_bid admin.id, 100, 100
-  instrument.add_bid admin.id, 110, 100
-  instrument.add_bid admin.id, 120, 100
   instrument.add_offer admin.id, 100, 100
+  instrument.add_bid admin.id, 110, 100
   instrument.add_offer admin.id, 110, 100
+  instrument.add_bid admin.id, 120, 100
   instrument.add_offer admin.id, 120, 100
   [order_book, instrument]
 end

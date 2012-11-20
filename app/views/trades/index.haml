@@ -1,1 +1,14 @@
+%table.table-striped
+  %tr
+    %th
+      Time
+    %th
+      Price
+    %th
+      Volume
+  - @trades.each do |trade|
+    %tr.trade
+      %td= trade.timestamp
+      %td= trade.price
+      %td= trade.volume
 

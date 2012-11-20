@@ -10,5 +10,7 @@ feature 'as a user I want to see lists of trades' do
     click_on 'trades'
 
     page.current_url.should =~ /trades/
+
+    all( '.trade' ).size.should == 3
   end
 end
