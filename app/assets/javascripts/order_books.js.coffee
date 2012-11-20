@@ -52,7 +52,7 @@ validate_email_list = () ->
 
 # reload instruments regularly
 setup_instrument_reloader = () ->
-  #setInterval(load_instruments, 5000);
+  setInterval(load_instruments, 5000);
 
 load_instruments = () ->
   $('.instrument').each(load_one_instrument)
