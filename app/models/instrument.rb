@@ -55,8 +55,6 @@ class Instrument
       trade_bid,   bids   = order_with_volume volume, bids
       trade_offer, offers = order_with_volume volume, offers
 
-      puts "============== creating a trade: price:#{price} volume:#{volume}"
-
       trade = Trade.new :bid => trade_bid, :offer => trade_offer, :volume => volume, :price => price, :created_at => Time.zone.now
       bids, offers, trades = match_orders bids, offers
       trades << trade
