@@ -3,7 +3,7 @@
 - number_of_rows = [bids.size, offers.size].max
 - volume_decimals = (bids + offers).map { |order| order.volume_decimals_count } .max
 - price_decimals = (bids + offers).map { |order| order.price_decimals_count } .max
-%table.table.table-striped
+%table.table.table-striped.table-hover
   %tr
     %th.instrument_name{ :colspan => 6 }= instrument.name
     %th= link_to 'trades', "/trades?instrument_id=#{instrument.id}"
