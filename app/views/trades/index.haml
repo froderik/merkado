@@ -1,6 +1,8 @@
 %table.table-striped
   %tr.top_header_row
     %th.instrument_name{ :colspan => 3 }= "All trades in #{@instrument.name}"
+    %th
+    %th
   %tr
     %th.number_header
       time
@@ -8,6 +10,10 @@
       price
     %th.number_header
       volume
+    %th.number_header
+      buyer
+    %th.number_header
+      seller
   - @trades.each do |trade|
     %tr.trade
       %td
@@ -16,4 +22,8 @@
         .number= trade.price
       %td
         .number= trade.volume
+      %td
+        = @users[trade.buyer].email if @users[trade.buyer]
+      %td
+        = @users[trade.seller].email if @users[trade.seller]
 

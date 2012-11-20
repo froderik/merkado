@@ -14,4 +14,9 @@ module Couch
   def self.find_by_id id
     CouchPotato.database.load id
   end
+
+  def self.find_mapped_by_id id
+    id_doc_tuples = find_by_id( id ).map { |doc| [doc.id, doc]}
+    Hash[id_doc_tuples]
+  end
 end

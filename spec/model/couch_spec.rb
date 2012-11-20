@@ -24,9 +24,22 @@ describe Couch do
   end
 
   it 'should find several by id' do
-    other = DummyDocument.new :value => 'another value'
-    other.save
+    other = create_other
     two = Couch.find_by_id [other.id, @doc.id]
     two.size.should == 2
+  end
+
+  it 'should find several mapped by id' do
+    other = create_other
+    two = Couch.find_mapped_by_id [other.id, @doc.id]
+    two.size.should == 2
+    two[other.id].should == other
+    two[@doc.id].should == @doc
+  end
+
+  def create_other
+    other = DummyDocument.new :value => 'another value'
+    other.save
+    other
   end
 end

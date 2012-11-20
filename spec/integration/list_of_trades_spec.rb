@@ -12,5 +12,8 @@ feature 'as a user I want to see lists of trades' do
     page.current_url.should =~ /trades/
 
     all( '.trade' ).size.should == 3
+    within '.trade' do
+      page.should have_content user.email
+    end
   end
 end
