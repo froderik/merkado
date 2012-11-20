@@ -9,6 +9,19 @@ def create_order_book_with_admin admin, name = 'Gott och blandat med admin'
   order_book
 end
 
+def create_order_book_with_one_instrument_traded_three_times admin
+  order_book = create_order_book_with_admin admin
+  instrument = create_instrument 'Godis'
+  add instrument, order_book
+  instrument.add_bid admin.id, 100, 100
+  instrument.add_bid admin.id, 110, 100
+  instrument.add_bid admin.id, 120, 100
+  instrument.add_offer admin.id, 100, 100
+  instrument.add_offer admin.id, 110, 100
+  instrument.add_offer admin.id, 120, 100
+  [order_book, instrument]
+end
+
 def add thing, order_book
   if thing.is_a? User
     order_book.add_user thing

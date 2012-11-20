@@ -21,6 +21,8 @@ Merkado::Application.routes.draw do
     end
   end
 
+  resources :trades
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -37,7 +37,10 @@ class Instrument
   end
 
   def add_trades trades
-    trades.each {|one_trade| one_trade.save }
+    trades.each do |one_trade|
+      one_trade.instrument_id = self.id
+      one_trade.save
+    end
   end
 
   def self.match_orders bids, offers

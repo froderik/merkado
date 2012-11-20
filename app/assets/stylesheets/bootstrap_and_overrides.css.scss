@@ -31,6 +31,14 @@ body {
   border-bottom: solid 2px;
 }
 
+.instrument_name {
+  text-align: left;
+  font-size: 135%;
+}
+
+.top_header_row {
+}
+
 #add-instrument-modal { width: 250px; }
 
 @import "bootstrap-responsive";

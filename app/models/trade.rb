@@ -30,18 +30,18 @@ class Trade
     CouchPotato.database.view self.by_instrument_id( :key => instrument_id )
   end
 
-  def self.find_by_buyer_id buyer_id
-    CouchPotato.database.view self.by_buyer_id( :key => buyer_id )
+  def self.find_by_buyer_id instrument_id, buyer_id
+    CouchPotato.database.view self.by_buyer_id( :key => [instrument_id, buyer_id] )
   end
 
-  def self.find_by_seller_id seller_id
-    CouchPotato.database.view self.by_seller_id( :key => seller_id )
+  def self.find_by_seller_id instrument_id, seller_id
+    CouchPotato.database.view self.by_seller_id( :key => [instrument_id, seller_id] )
   end
 
   def self.trades_by_user_js kind
     """
     function(doc) {
-      emit(doc['#{kind}']['user_id'], 1);
+      emit([doc['instrument_id'], doc['#{kind}']['user_id']], 1);
     }
     """
   end
