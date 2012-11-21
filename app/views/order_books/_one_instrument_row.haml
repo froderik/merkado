@@ -4,7 +4,7 @@
   %td
   %td
     - if first
-      %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"bid-button", 'data-toggle'=>"modal"}
+      %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"bid-button", 'data-toggle'=>"modal"}
         Bid
 
   - bid_styling = ''
@@ -27,5 +27,5 @@
 
   %td
     - if first
-      %a{ :href=>"#offer-#{instrument.id}-modal", :role=>"button", :class => "btn", :id=>"offer-button", 'data-toggle'=>"modal"}
+      %a{ :href=>"#offer-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"offer-button", 'data-toggle'=>"modal"}
         Offer
