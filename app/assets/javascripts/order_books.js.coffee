@@ -1,6 +1,7 @@
 # callback after adding an instrument
 load_instrument_list = (xhr, data, status) ->
   $('.instrument_list').html(data)
+  setup_order_placement()
   $('#add-instrument-modal').modal('hide')
 
 add_instrument_list_callback = () ->
@@ -12,6 +13,12 @@ add_invite_callback = () ->
 
 close_invite_modal = () ->
   $('#add-invite-modal').modal('hide')
+
+
+# setup place order scriptz
+setup_order_placement = () ->
+  place_order_enabler()
+  place_order_callback()
 
 # callback after placing an order
 order_placed_succesfully = (xhr, data, status) ->
@@ -66,6 +73,5 @@ $ ->
   add_instrument_list_callback()
   add_invite_callback()
   add_email_list_listener()
-  place_order_callback()
-  place_order_enabler()
+  setup_order_placement()
   setup_instrument_reloader()
