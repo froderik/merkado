@@ -42,7 +42,10 @@
         .number= trade.volume
       - if @is_admin
         %td
-          .number= @users[trade.buyer].email if @users[trade.buyer]
+          - if @users[trade.buyer]
+            .number
+              = render :partial => 'shared/email', :locals => {:email => @users[trade.buyer].email}
         %td
-          .number= @users[trade.seller].email if @users[trade.seller]
-
+          - if @users[trade.seller]
+            .number
+              = render :partial => 'shared/email', :locals => {:email => @users[trade.seller].email}
