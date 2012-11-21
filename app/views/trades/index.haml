@@ -2,9 +2,13 @@
   %thead
     %tr.top_header_row
       - title = "#{@is_admin ? 'All' : 'Your'} trades in #{@instrument.name}"
-      %th.instrument_name{ :colspan => 4 }= title
+      %th.instrument_name{ :colspan => 3 }
+        = title
       - if @is_admin
         %th{ :colspan => 1 }
+      %th.instrument_name
+        .number_header= link_to @order_book.name, @order_book
+
   %tr
     - unless @is_admin
       %th
