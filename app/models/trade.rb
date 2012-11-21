@@ -53,7 +53,7 @@ class Trade
   def self.find_by_user_id instrument_id, user_id
     by_buyer = find_by_buyer_id instrument_id, user_id
     by_seller = find_by_seller_id instrument_id, user_id
-    (by_buyer + by_seller).uniq!.sort { |one, other| other.timestamp <=> one.timestamp }
+    (by_buyer + by_seller).uniq.sort { |one, other| other.timestamp <=> one.timestamp }
   end
 
   def self.trades_by_user_js kind
