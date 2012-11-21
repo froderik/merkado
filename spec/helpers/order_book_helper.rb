@@ -25,11 +25,12 @@ end
 def add thing, order_book
   if thing.is_a? User
     order_book.add_user thing
+    order_book.save
   elsif thing.is_a? Instrument
-    order_book.add_instrument thing
+    thing.order_book_id = order_book.id
+    thing.save
   else
     raise "Can't add things of the type #{thing.class}"
   end
-  order_book.save
 end
 

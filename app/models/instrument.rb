@@ -6,6 +6,7 @@ class Instrument
   property :description
   property :bids,   :type => [Order]
   property :offers, :type => [Order]
+  property :order_book_id, :type => String
 
   validates :name, :presence => true
 
@@ -73,4 +74,10 @@ class Instrument
       [orders.first, orders]
     end
   end
+
+  def self.find_by_order_book_id order_book_id
+    CouchPotato.database.view Instrument.by_order_book_id( :key => order_book_id )
+  end
+
+  view :by_order_book_id, :key => :order_book_id
 end

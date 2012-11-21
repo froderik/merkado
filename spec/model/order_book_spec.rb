@@ -14,9 +14,10 @@ describe OrderBook do
     user_ids.first.should == user.id
   end
 
-  it 'should add instruments' do
-    subject.add_instrument create_instrument
-    subject.save
+  it 'should retrieve instruments' do
+    instrument = create_instrument
+    instrument.order_book_id = subject.id
+    instrument.save
     subject.instrument_list.size.should == 1
     subject.instrument_list.first.name.should == default_instrument_name
   end

@@ -5,7 +5,6 @@ class OrderBook
   property :user_admin_id
   property :name
   property :user_ids, :type => [String]
-  property :instrument_ids, :type => [String]
 
   validates :name, :presence => true
 
@@ -18,14 +17,8 @@ class OrderBook
     self.is_dirty
   end
 
-  def add_instrument instrument
-    self.instrument_ids ||= []
-    self.instrument_ids << instrument.id
-    self.is_dirty
-  end
-
   def instrument_list
-    instrument_ids ? Couch.find_by_id( instrument_ids ) : []
+    Instrument.find_by_order_book_id id
   end
 
   def self.order_books_by_userid_js
