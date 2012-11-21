@@ -25,4 +25,10 @@ describe OrderBook do
   it 'should have a name' do
     subject.should validate_presence_of_field :name
   end
+
+  it 'should know if user is admin' do
+    subject.should_not be_admin user
+    subject.user_admin_id = user.id
+    subject.should be_admin user
+  end
 end

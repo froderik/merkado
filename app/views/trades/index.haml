@@ -1,10 +1,13 @@
 %table.table.table-striped.table-hover.table-condensed
   %thead
     %tr.top_header_row
-      %th.instrument_name{ :colspan => 3 }= "All trades in #{@instrument.name}"
-      %th
-      %th
+      - title = "#{@is_admin ? 'All' : 'Your'} trades in #{@instrument.name}"
+      %th.instrument_name{ :colspan => 4 }= title
+      - if @is_admin
+        %th{ :colspan => 1 }
   %tr
+    - unless @is_admin
+      %th
     %th
       .number_header
         time
@@ -14,22 +17,32 @@
     %th
       .number_header
         volume
-    %th
-      .number_header
-        buyer
-    %th
-      .number_header
-        seller
+    - if @is_admin
+      %th
+        .number_header
+          buyer
+      %th
+        .number_header
+          seller
   - @trades.each do |trade|
     %tr.trade
+      - unless @is_admin
+        %td
+          - if trade.buyer_and_seller? @user
+            both
+          - elsif trade.buyer? @user
+            bought
+          - elsif trade.seller? @user
+            sold
       %td
         .number= trade.timestamp
       %td
         .number= trade.price
       %td
         .number= trade.volume
-      %td
-        .number= @users[trade.buyer].email if @users[trade.buyer]
-      %td
-        .number= @users[trade.seller].email if @users[trade.seller]
+      - if @is_admin
+        %td
+          .number= @users[trade.buyer].email if @users[trade.buyer]
+        %td
+          .number= @users[trade.seller].email if @users[trade.seller]
 

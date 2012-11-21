@@ -21,6 +21,10 @@ class OrderBook
     Instrument.find_by_order_book_id id
   end
 
+  def admin? user
+    user_admin_id == user.id
+  end
+
   def self.order_books_by_userid_js
     """
     function(doc) {

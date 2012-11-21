@@ -17,12 +17,12 @@ feature 'as a user I want to see lists of trades' do
     end
   end
 
-  # scenario 'user should not see other users trades' do
-  #   user = create_and_sign_in_user
-  #   admin = create_user
-  #   order_book, instrument = create_order_book_with_one_instrument_traded_three_times admin
+  scenario 'user should not see other users trades' do
+    user = create_and_sign_in_user
+    admin = create_user
+    order_book, instrument = create_order_book_with_one_instrument_traded_three_times admin
 
-  #   visit "/trades?instrument_id=#{instrument.id}"
-  #   all( '.trade' ).size.should == 0
-  # end
+    visit "/trades?instrument_id=#{instrument.id}"
+    all( '.trade' ).size.should == 0
+  end
 end
