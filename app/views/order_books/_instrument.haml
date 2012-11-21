@@ -4,21 +4,22 @@
 - volume_decimals = (bids + offers).map { |order| order.volume_decimals_count } .max
 - price_decimals = (bids + offers).map { |order| order.price_decimals_count } .max
 %table.table.table-striped.table-hover.table-condensed
-  %tr
-    %th.instrument_name{ :colspan => 6 }= instrument.name
-    %th= link_to 'trades', "/trades?instrument_id=#{instrument.id}"
-  %tr
-    %th
-    %th
-    %th
-      .number_header volume
-    %th
-      .number_header price
-    %th
-      .number_header price
-    %th
-      .number_header volume
-    %th
+  %thead
+    %tr
+      %th.instrument_name{ :colspan => 6 }= instrument.name
+      %th= link_to 'trades', "/trades?instrument_id=#{instrument.id}"
+    %tr
+      %th
+      %th
+      %th
+        .number_header volume
+      %th
+        .number_header price
+      %th
+        .number_header price
+      %th
+        .number_header volume
+      %th
   - locals = {:instrument => instrument, :volume_decimals => volume_decimals, :price_decimals => price_decimals}
   - if number_of_rows == 0
     - locals[:first] = true

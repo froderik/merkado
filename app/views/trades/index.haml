@@ -1,22 +1,23 @@
 %table.table.table-striped.table-hover.table-condensed
-  %tr.top_header_row
-    %th.instrument_name{ :colspan => 3 }= "All trades in #{@instrument.name}"
-    %th
-    %th
+  %thead
+    %tr.top_header_row
+      %th.instrument_name{ :colspan => 3 }= "All trades in #{@instrument.name}"
+      %th
+      %th
   %tr
-    %td
+    %th
       .number_header
         time
-    %td
+    %th
       .number_header
         price
-    %td
+    %th
       .number_header
         volume
-    %td
+    %th
       .number_header
         buyer
-    %td
+    %th
       .number_header
         seller
   - @trades.each do |trade|
