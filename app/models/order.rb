@@ -5,6 +5,9 @@ class Order
   property :price, :type => Float
   property :volume, :type => Float
   property :user_id
+  property :instrument_id
+
+  validates :price, :volume, :user_id, :instrument_id, :presence => true
 
   Order::BID = 'bid'
   Order::OFFER = 'offer'

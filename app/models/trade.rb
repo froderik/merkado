@@ -6,7 +6,7 @@ class Trade
   property :offer,         :type => Order
   property :price,         :type => Float
   property :volume,        :type => Float
-  property :instrument_id, :type => String
+  property :instrument_id
 
   validates :bid,           :presence => true
   validates :offer,         :presence => true
