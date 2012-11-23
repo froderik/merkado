@@ -28,6 +28,10 @@ describe Order do
     assert_formatted_number 1345.79, 4, '1345.7900'
   end
 
+  def assert_formatted_number number, decimals, expected
+    Order.format( number, decimals ).should == expected
+  end
+
   it 'has mandatory fields' do
     subject.should validate_presence_of_field :price
     subject.should validate_presence_of_field :volume
@@ -35,7 +39,23 @@ describe Order do
     subject.should validate_presence_of_field :instrument_id
   end
 
-  def assert_formatted_number number, decimals, expected
-    Order.format( number, decimals ).should == expected
+  it 'should find orders by instrument' do
+    subject.instrument_id = 'myid'
+    subject.save
+
+    another = create_order 'nonsense', 99, 900
+    another.instrument_id = 'myid'
+    another.save
+
+    athird = create_order 'nonsense', 101, 900
+    athird.instrument_id = 'myid'
+    athird.save
+
+    orders = Order.find_by_instrument_id 'myid', false
+    orders.size.should == 3
+    orders[0].price.should == 99
+    orders[2].price.should == 101
   end
+
+
 end
