@@ -18,10 +18,13 @@ Merkado::Application.routes.draw do
   resources :instruments do
     member do
       put 'place_order'
+      delete 'destroy_order'
     end
   end
 
   resources :trades
+
+  resources :orders
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

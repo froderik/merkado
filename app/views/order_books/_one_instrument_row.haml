@@ -7,23 +7,17 @@
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"bid-button", 'data-toggle'=>"modal"}
         Bid
 
-  - bid_styling = ''
-  - bid_styling = 'mine' if bid and bid.user_id == @user.id
-  %td{:class => bid_styling}
-    .bid_volume.number
-      = bid.formatted_volume( volume_decimals ) if bid
-  %td{:class => bid_styling}
-    .bid_price.number
-      = bid.formatted_price( price_decimals ) if bid
+  - start_locals = { :user => @user, :instrument => instrument }
 
-  - offer_styling = ''
-  - offer_styling = 'mine' if offer and offer.user_id == @user.id
-  %td{:class => offer_styling}
-    .offer_price.number
-      = offer.formatted_price( price_decimals ) if offer
-  %td{:class => offer_styling}
-    .offer_volume.number
-      = offer.formatted_volume( volume_decimals ) if offer
+  - locals = start_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => bid )
+  = render :partial => 'shared/one_order_number', :locals => locals
+  - locals = start_locals.merge( :order_method => :price, :decimals => price_decimals, :order => bid )
+  = render :partial => 'shared/one_order_number', :locals => locals
+
+  - locals = start_locals.merge( :order_method => :price, :decimals => price_decimals, :order => offer )
+  = render :partial => 'shared/one_order_number', :locals => locals
+  - locals = start_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => offer )
+  = render :partial => 'shared/one_order_number', :locals => locals
 
   %td
     - if first

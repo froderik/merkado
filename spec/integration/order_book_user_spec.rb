@@ -2,9 +2,9 @@ require 'spec_helper'
 
 feature 'as an order book user I want to place bids and offers - ' do
   background do
-    user = create_and_sign_in_user
+    @user = create_and_sign_in_user
     @order_book = create_order_book
-    add user, @order_book
+    add @user, @order_book
     @instrument = create_instrument
     add @instrument, @order_book
   end
@@ -35,5 +35,22 @@ feature 'as an order book user I want to place bids and offers - ' do
     page.find( '.offer_volume', :text => "300" ).should_not be_nil
   end
 
+  scenario 'remove a placed order' do
+    @instrument.add_bid @user.id, 98, 100
+    @instrument.add_bid @user.id, 97, 100
+    @instrument.add_bid 'ya', 96, 100
 
+    visit "/order_books/#{@order_book.id}"
+
+    click_on '98'
+
+    page.should have_content '97'
+    page.should_not have_content '98'
+
+    bids = Bid.find_by_instrument @instrument
+    bids.size.should == 2
+
+    find('.number', :text => '96').click
+    page.should have_content '96'
+  end
 end

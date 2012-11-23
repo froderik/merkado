@@ -75,3 +75,4 @@ $ ->
   add_email_list_listener()
   setup_order_placement()
   setup_instrument_reloader()
+  $('.destroy_link').bind('ajax:success', load_instruments)

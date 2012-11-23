@@ -1,0 +1,12 @@
+- mine = (order and order.user_id == user.id)
+%td
+  .number{:class => "#{order.class.name.downcase}_#{order_method}"}
+    - if order
+      - value = order.send( "formatted_#{order_method}".to_sym, decimals )
+      - if mine
+        - order_styling = 'destroy_link'
+        - order_styling << (mine ? ' mine' : '')
+        - destroy_url = "/instruments/#{instrument.id}/destroy_order?order_id=#{order.id}"
+        = link_to value, destroy_url, :class => order_styling, :method => :delete, :remote => true, :instrument_id => instrument.id
+      - else
+        = value
