@@ -2,28 +2,20 @@ class Trade
   include CouchPotato::Persistence
   include Couch::InstanceMethods
 
-  property :bid,           :type => Order
-  property :offer,         :type => Order
+  property :buyer
+  property :seller
   property :price,         :type => Float
   property :volume,        :type => Float
   property :instrument_id
 
-  validates :bid,           :presence => true
-  validates :offer,         :presence => true
+  validates :buyer,           :presence => true
+  validates :seller,         :presence => true
   validates :price,         :presence => true
   validates :volume,        :presence => true
   validates :instrument_id, :presence => true
 
   def timestamp
     created_at
-  end
-
-  def seller
-    offer.user_id
-  end
-
-  def buyer
-    bid.user_id
   end
 
   def buyer? user
@@ -56,15 +48,7 @@ class Trade
     (by_buyer + by_seller).uniq.sort { |one, other| other.timestamp <=> one.timestamp }
   end
 
-  def self.trades_by_user_js kind
-    """
-    function(doc) {
-      emit([doc['instrument_id'], doc['#{kind}']['user_id']], 1);
-    }
-    """
-  end
-
   view :by_instrument_id, :key => :instrument_id
-  view :by_buyer_id, :map => trades_by_user_js( 'bid' ), :type => :custom, :include_docs => true
-  view :by_seller_id, :map => trades_by_user_js( 'offer' ), :type => :custom, :include_docs => true
+  view :by_buyer_id, :key => [:instrument_id, :buyer]
+  view :by_seller_id, :key => [:instrument_id, :seller]
 end

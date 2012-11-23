@@ -4,37 +4,47 @@ class Instrument
 
   property :name
   property :description
-  property :bids,   :type => [Order]
-  property :offers, :type => [Order]
   property :order_book_id, :type => String
 
   validates :name, :presence => true
 
   def add_bid user_id, price, volume = 1
-    new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id, :created_at => Time.zone.now
-    self.bids ||= []
-    self.offers ||= []
-    self.bids << new_order
-    self.bids.sort! { |one, other| other.price <=> one.price }
+    new_order = Bid.new(
+      :price => price.to_f,
+      :volume => volume.to_f,
+      :user_id => user_id,
+      :created_at => Time.zone.now,
+      :instrument_id => id
+    )
+    new_order.save
     match_orders
-    self.is_dirty
-    save
   end
 
   def add_offer user_id, price, volume = 1
-    new_order = Order.new :price => price.to_f, :volume => volume.to_f, :user_id => user_id, :created_at => Time.zone.now
-    self.bids ||= []
-    self.offers ||= []
-    self.offers << new_order
-    self.offers.sort! { |one, other| one.price <=> other.price }
+    new_order = Offer.new(
+      :price => price.to_f,
+      :volume => volume.to_f,
+      :user_id => user_id,
+      :created_at => Time.zone.now,
+      :instrument_id => id
+    )
+    new_order.save
     match_orders
-    self.is_dirty
-    save
+  end
+
+  def bids
+    Bid.find_by_instrument self
+  end
+
+  def offers
+    Offer.find_by_instrument self
   end
 
   def match_orders
-    self.bids, self.offers, trades = Instrument::match_orders(bids, offers)
+    _, _, trades, to_save, to_destroy = Instrument::match_orders(bids, offers)
     add_trades trades
+    to_save.each { |order| order.save }
+    to_destroy.each { |order| order.destroy }
   end
 
   def add_trades trades
@@ -44,33 +54,35 @@ class Instrument
     end
   end
 
-  def self.match_orders bids, offers
+  def self.match_orders bids, offers, to_save = [], to_destroy = []
     first_bid = bids.first
     first_offer = offers.first
     if not (first_bid and first_offer)
-      [bids, offers, []]
+      [bids, offers, [], to_save, to_destroy]
     elsif first_bid.price >= first_offer.price
       volume = [first_bid.volume, first_offer.volume].min
       price = (first_bid.price + first_offer.price) / 2
 
-      trade_bid,   bids   = order_with_volume volume, bids
-      trade_offer, offers = order_with_volume volume, offers
+      trade_bid,   bids   = order_with_volume volume, bids, to_save, to_destroy
+      trade_offer, offers = order_with_volume volume, offers, to_save, to_destroy
 
-      trade = Trade.new :bid => trade_bid, :offer => trade_offer, :volume => volume, :price => price, :created_at => Time.zone.now
-      bids, offers, trades = match_orders bids, offers
+      trade = Trade.new :buyer => trade_bid.user_id, :seller => trade_offer.user_id, :volume => volume, :price => price, :created_at => Time.zone.now
+      bids, offers, trades, to_save, to_destroy = match_orders bids, offers, to_save, to_destroy
       trades << trade
-      [bids, offers, trades]
+      [bids, offers, trades, to_save, to_destroy]
     else
-      [bids, offers, []]
+      [bids, offers, [], to_save, to_destroy]
     end
   end
 
-  def self.order_with_volume volume, orders
+  def self.order_with_volume volume, orders, to_save, to_destroy
     if orders.first.volume == volume
       new_order = orders.shift
+      to_destroy << new_order
       [new_order, orders]
     elsif orders.first.volume > volume
       orders.first.volume -= volume
+      to_save << orders.first
       [orders.first, orders]
     end
   end

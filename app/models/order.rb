@@ -39,12 +39,4 @@ class Order
   def self.format number, decimals = 0
     sprintf "%.#{decimals}f", number
   end
-
-  def self.find_by_instrument_id instrument_id, descending = false
-    orders = CouchPotato.database.view Order.by_instrument_id( :key => instrument_id, :descending => descending )
-    orders.sort { |one, other| descending ? other.price <=> one.price : one.price <=> other.price }
-  end
-
-  view :by_instrument_id, :key => :instrument_id
-
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Order do
-  subject { create_order }
+  subject { create_bid }
 
   it 'should format volume' do
     subject.formatted_volume.should == '1000'
@@ -43,18 +43,18 @@ describe Order do
     subject.instrument_id = 'myid'
     subject.save
 
-    another = create_order 'nonsense', 99, 900
+    another = create_bid 'nonsense', 99, 900
     another.instrument_id = 'myid'
     another.save
 
-    athird = create_order 'nonsense', 101, 900
+    athird = create_bid 'nonsense', 101, 900
     athird.instrument_id = 'myid'
     athird.save
 
-    orders = Order.find_by_instrument_id 'myid', false
+    orders = Bid.find_by_instrument_id 'myid'
     orders.size.should == 3
-    orders[0].price.should == 99
-    orders[2].price.should == 101
+    orders[0].price.should == 101
+    orders[2].price.should == 99
   end
 
 
