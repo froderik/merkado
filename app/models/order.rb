@@ -2,8 +2,8 @@ class Order
   include CouchPotato::Persistence
   include Couch::InstanceMethods
 
-  property :price, :type => Float
-  property :volume, :type => Float
+  property :price, :type => BigDecimal
+  property :volume, :type => BigDecimal
   property :user_id
   property :instrument_id
 
