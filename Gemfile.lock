@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:froderik/couch_potato.git
-  revision: 66d6eb69c5fd5365137f82a1e5b9a46ecbe2896e
+  remote: git@github.com:langalex/couch_potato.git
+  revision: e08ad144eb0a900f4a35c4a55b0adea653a33b16
   specs:
     couch_potato (0.7.1)
       activemodel

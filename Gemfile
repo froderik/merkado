@@ -7,7 +7,7 @@ gem 'actionmailer'
 gem 'activemodel'
 
 # couch
-gem 'couch_potato', :git => 'git@github.com:froderik/couch_potato.git'
+gem 'couch_potato', :git => 'git@github.com:langalex/couch_potato.git'
 gem 'tzinfo' # cause needed by activesupport but required by activerecord
 
 # markup
