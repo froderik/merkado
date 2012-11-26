@@ -4,8 +4,8 @@ class Trade
 
   property :buyer
   property :seller
-  property :price,         :type => Float
-  property :volume,        :type => Float
+  property :price,         :type => BigDecimal
+  property :volume,        :type => BigDecimal
   property :instrument_id
 
   validates :buyer,           :presence => true
