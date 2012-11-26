@@ -39,6 +39,12 @@ describe Order do
     subject.should validate_presence_of_field :instrument_id
   end
 
+  it 'may have a note' do
+    subject.note.should be_nil
+    subject.note = 'A note describing this order'
+    subject.note.should_not be_nil
+  end
+
   it 'should find orders by instrument' do
     subject.instrument_id = 'myid'
     subject.save

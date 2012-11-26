@@ -4,6 +4,7 @@ class Order
 
   property :price, :type => BigDecimal
   property :volume, :type => BigDecimal
+  property :note
   property :user_id
   property :instrument_id
 
