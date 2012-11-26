@@ -19,6 +19,7 @@ close_invite_modal = () ->
 setup_order_placement = () ->
   place_order_enabler()
   place_order_callback()
+  order_tooltips('.mine')
 
 # callback after placing an order
 order_placed_succesfully = (xhr, data, status) ->
@@ -66,7 +67,18 @@ load_instruments = () ->
 
 load_one_instrument = () ->
   id = $(this).attr('id')
-  $.get('/instruments/' + id, (data) -> $('#' + id).html(data))
+  $.get('/instruments/' + id, (data) -> update_one_instrument(id, data) )
+
+update_one_instrument = (id, data) ->
+  $('#' + id).html(data)
+  order_tooltips('#' + id + ' .mine')
+
+# tooltips
+order_tooltips = (selector) ->
+  $(selector).tooltip(tooltip_options())
+
+tooltip_options = () ->
+  'title': 'click to delete'
 
 # document.ready
 $ ->
