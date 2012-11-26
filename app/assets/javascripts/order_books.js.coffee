@@ -20,6 +20,7 @@ setup_order_placement = () ->
   place_order_enabler()
   place_order_callback()
   order_tooltips('.mine')
+  order_popovers('.bid_note, .offer_note')
 
 # callback after placing an order
 order_placed_succesfully = (xhr, data, status) ->
@@ -72,13 +73,17 @@ load_one_instrument = () ->
 update_one_instrument = (id, data) ->
   $('#' + id).html(data)
   order_tooltips('#' + id + ' .mine')
+  order_popovers('#' + id + ' .bid_note')
+  order_popovers('#' + id + ' .offer_note')
 
 # tooltips
 order_tooltips = (selector) ->
-  $(selector).tooltip(tooltip_options())
+  $(selector).tooltip('title': 'click to delete')
 
-tooltip_options = () ->
-  'title': 'click to delete'
+# popovers
+order_popovers = (selector) ->
+  $(selector).popover('title': 'Note')
+
 
 # document.ready
 $ ->

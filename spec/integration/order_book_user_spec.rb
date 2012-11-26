@@ -30,9 +30,11 @@ feature 'as an order book user I want to place bids and offers - ' do
     end
     fill_in 'price', :with => "225.43"
     fill_in 'volume', :with => "300"
+    fill_in 'note', :with => "Wow - this was expensive!"
     click_on 'Place'
     page.find( '.offer_price', :text => "225.43" ).should_not be_nil
     page.find( '.offer_volume', :text => "300" ).should_not be_nil
+    page.find( '.offer_note' )['data-content'].should == "Wow - this was expensive!"
   end
 
   scenario 'remove a placed order' do

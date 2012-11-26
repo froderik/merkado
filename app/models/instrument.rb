@@ -8,10 +8,11 @@ class Instrument
 
   validates :name, :presence => true
 
-  def add_bid user_id, price, volume = 1
+  def add_bid user_id, price, volume = 1, note = nil
     new_order = Bid.new(
       :price => price.to_f,
       :volume => volume.to_f,
+      :note => note,
       :user_id => user_id,
       :created_at => Time.zone.now,
       :instrument_id => id
@@ -20,10 +21,11 @@ class Instrument
     match_orders
   end
 
-  def add_offer user_id, price, volume = 1
+  def add_offer user_id, price, volume = 1, note = nil
     new_order = Offer.new(
       :price => price.to_f,
       :volume => volume.to_f,
+      :note => note,
       :user_id => user_id,
       :created_at => Time.zone.now,
       :instrument_id => id

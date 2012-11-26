@@ -7,17 +7,27 @@
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"bid-button", 'data-toggle'=>"modal"}
         Bid
 
-  - start_locals = { :user => @user, :instrument => instrument }
+  - common_locals = { :user => @user, :instrument => instrument }
 
-  - locals = start_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => bid )
+  %td
+    - if bid and bid.note
+      .number.bid_note{ 'data-content' => bid.note }
+        %i.icon-pencil
+
+  - locals = common_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => bid )
   = render :partial => 'shared/one_order_number', :locals => locals
-  - locals = start_locals.merge( :order_method => :price, :decimals => price_decimals, :order => bid )
+  - locals = common_locals.merge( :order_method => :price, :decimals => price_decimals, :order => bid )
   = render :partial => 'shared/one_order_number', :locals => locals
 
-  - locals = start_locals.merge( :order_method => :price, :decimals => price_decimals, :order => offer )
+  - locals = common_locals.merge( :order_method => :price, :decimals => price_decimals, :order => offer )
   = render :partial => 'shared/one_order_number', :locals => locals
-  - locals = start_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => offer )
+  - locals = common_locals.merge( :order_method => :volume, :decimals => volume_decimals, :order => offer )
   = render :partial => 'shared/one_order_number', :locals => locals
+
+  %td
+    - if offer and offer.note
+      .offer_note{ 'data-content' => offer.note }
+        %i.icon-pencil
 
   %td
     - if first

@@ -10,6 +10,8 @@
       = number_field_tag :price, nil, :min => 0.0, :class => :price_input, :step => :any
       = label_tag :volume
       = number_field_tag :volume, nil, :min => 0.0, :class => :volume_input, :step => :any
+      = label_tag :note
+      = text_area_tag :note
       = hidden_field_tag :type, type
     .modal-footer
       = submit_tag 'Place', :disabled => true, :class => 'place_order_button'
