@@ -22,6 +22,17 @@ class HeartController < ApplicationController
     redirect_to :root, :notice => 'You have been signed out'
   end
 
+  def sign_up
+    if params[:invite_id]
+      invite = Couch.find_by_id params[:invite_id]
+      if invite and not invite.consumed?
+        else redirect_to :root
+      end
+    else
+      redirect_to :root
+    end
+  end
+
   def auth_failure
     reset_session
     redirect_to :root, :notice => 'Invalid user'

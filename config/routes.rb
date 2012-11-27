@@ -3,6 +3,7 @@ Merkado::Application.routes.draw do
 
   match 'sign_in' => 'heart#sign_in'
   match 'sign_out' => 'heart#sign_out'
+  match 'sign_up' => 'heart#sign_up'
 
   # omniauth stuff
   match '/auth/identity/callback' => 'heart#sign_in'

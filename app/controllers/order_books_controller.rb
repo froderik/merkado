@@ -8,7 +8,6 @@ class OrderBooksController < ApplicationController
     @order_book = Couch.find_by_id params[:id]
     if session[:user_id] == @order_book.user_admin_id
       @new_instrument = Instrument.new
-      @new_invite = Invite.new
     end
   end
 
@@ -31,7 +30,6 @@ class OrderBooksController < ApplicationController
       invite.save
       InvitationMailer.invitation_email(invite).deliver
     end
-
     render :nothing => true
   end
 end
