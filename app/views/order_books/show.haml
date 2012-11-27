@@ -29,5 +29,5 @@
       .modal-footer
         = submit_tag 'Send', :disabled => true, :id => 'send_invites_button'
 
-.instrument_list
+.instrument_list{:id => @order_book.id }
   = render :partial => 'instrument_list', :locals => {:order_book => @order_book}

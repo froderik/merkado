@@ -12,6 +12,11 @@ class OrderBooksController < ApplicationController
     end
   end
 
+  def instrument_list
+    @order_book = Couch.find_by_id params[:id]
+    render :partial => 'instrument_list', :locals => {:order_book => @order_book}
+  end
+
   def add_instrument
     @order_book = Couch.find_by_id params[:id]
     instrument = Instrument.new params[:instrument]

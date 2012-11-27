@@ -2,10 +2,13 @@
 load_instrument_list = (xhr, data, status) ->
   $('.instrument_list').html(data)
   setup_order_placement()
+
+load_instrument_list_and_hide_instrument_modal = (xhr, data, status) ->
+  load_instrument_list(xhr, data, status)
   $('#add-instrument-modal').modal('hide')
 
 add_instrument_list_callback = () ->
-  $('.new_instrument').bind('ajax:success', load_instrument_list)
+  $('.new_instrument').bind('ajax:success', load_instrument_list_and_hide_instrument_modal)
 
 # callback after adding invitees
 add_invite_callback = () ->
@@ -21,6 +24,9 @@ setup_order_placement = () ->
   place_order_callback()
   order_tooltips('.mine')
   order_popovers('.bid_note, .offer_note')
+  $('.modal').bind('show', stop_loading )
+  $('.modal').bind('hidden', setup_instrument_reloader )
+
 
 # callback after placing an order
 order_placed_succesfully = (xhr, data, status) ->
@@ -61,20 +67,16 @@ validate_email_list = () ->
 
 # reload instruments regularly
 setup_instrument_reloader = () ->
-  setInterval(load_instruments, 5000);
+  intervalId = setInterval(load_instruments, 5000);
+  $('.instrument_list').attr('interval-id', intervalId)
 
 load_instruments = () ->
-  $('.instrument').each(load_one_instrument)
+  orderbookid = $('.instrument_list').attr('id')
+  $.get("/order_books/#{orderbookid}/instrument_list", (data) -> load_instrument_list('', data))
 
-load_one_instrument = () ->
-  id = $(this).attr('id')
-  $.get('/instruments/' + id, (data) -> update_one_instrument(id, data) )
-
-update_one_instrument = (id, data) ->
-  $('#' + id).html(data)
-  order_tooltips('#' + id + ' .mine')
-  order_popovers('#' + id + ' .bid_note')
-  order_popovers('#' + id + ' .offer_note')
+stop_loading = () ->
+  interval_id = $('.instrument_list').attr('interval-id')
+  clearInterval(interval_id)
 
 # tooltips
 order_tooltips = (selector) ->

@@ -12,6 +12,7 @@ Merkado::Application.routes.draw do
     member do
       put 'add_instrument'
       put 'add_invite'
+      get 'instrument_list'
     end
   end
 
