@@ -2,6 +2,8 @@
 - offer ||= offer
 %tr
   %td
+    - if first
+      .instrument_name= instrument.name
   %td
     - if first
       %a{ :href=>"#bid-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"bid-button", 'data-toggle'=>"modal"}
@@ -33,3 +35,7 @@
     - if first
       %a{ :href=>"#offer-#{instrument.id}-modal", :role=>"button", :class => "btn btn-mini", :id=>"offer-button", 'data-toggle'=>"modal"}
         Offer
+  %td
+    - if first
+      = link_to 'trades', "/trades?instrument_id=#{instrument.id}"
+
