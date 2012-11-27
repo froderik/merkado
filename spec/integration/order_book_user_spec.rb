@@ -12,12 +12,11 @@ feature 'as an order book user I want to place bids and offers - ' do
   scenario 'place a bid', :js => true do
     visit "/order_books/#{@order_book.id}"
 
-    within "##{@instrument.id}" do
-      click_on 'Bid'
-    end
+    click_on 'Bid'
     fill_in 'price', :with => "125.43"
     fill_in 'volume', :with => "100"
     click_on 'Place'
+
     page.find( '.bid_price', :text => "125.43" ).should_not be_nil
     page.find( '.bid_volume', :text => "100" ).should_not be_nil
   end
@@ -25,13 +24,12 @@ feature 'as an order book user I want to place bids and offers - ' do
   scenario 'place an offer', :js => true do
     visit "/order_books/#{@order_book.id}"
 
-    within "##{@instrument.id}" do
-      click_on 'Offer'
-    end
+    click_on 'Offer'
     fill_in 'price', :with => "225.43"
     fill_in 'volume', :with => "300"
     fill_in 'note', :with => "Wow - this was expensive!"
     click_on 'Place'
+
     page.find( '.offer_price', :text => "225.43" ).should_not be_nil
     page.find( '.offer_volume', :text => "300" ).should_not be_nil
     page.find( '.offer_note' )['data-content'].should == "Wow - this was expensive!"

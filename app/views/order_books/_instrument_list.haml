@@ -16,5 +16,7 @@
     - instrument_list.each do |one_instrument|
       .instrument{:id => "#{one_instrument.id}"}
         = render :partial => 'instrument', :locals => {:instrument => one_instrument}
-      = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::BID}
-      = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::OFFER}
+- if instrument_list
+  - instrument_list.each do |one_instrument|
+    = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::BID}
+    = render :partial => 'place_order_modal', :locals => {:one_instrument => one_instrument, :type => Order::OFFER}
