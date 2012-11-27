@@ -3,25 +3,12 @@
 - number_of_rows = [bids.size, offers.size].max
 - volume_decimals = (bids + offers).map { |order| order.volume_decimals_count } .max
 - price_decimals = (bids + offers).map { |order| order.price_decimals_count } .max
-%table.table.table-striped.table-hover.table-condensed
-  %thead
-    %tr
-      %th{ :colspan => 3 }
-      %th
-        .number_header volume
-      %th
-        .number_header price
-      %th
-        .number_header price
-      %th
-        .number_header volume
-      %th{ :colspan => 3 }
-  - locals = {:instrument => instrument, :volume_decimals => volume_decimals, :price_decimals => price_decimals}
-  - if number_of_rows == 0
-    - locals[:first] = true
-    = render :partial => 'order_books/one_instrument_row', :locals => locals
-  - (0...number_of_rows).each do |row|
-    - locals[:first] = row == 0
-    - locals[:bid] = bids[row]
-    - locals[:offer] = offers[row]
-    = render :partial => 'order_books/one_instrument_row', :locals => locals
+- locals = {:instrument => instrument, :volume_decimals => volume_decimals, :price_decimals => price_decimals}
+- if number_of_rows == 0
+  - locals[:first] = true
+  = render :partial => 'order_books/one_instrument_row', :locals => locals
+- (0...number_of_rows).each do |row|
+  - locals[:first] = row == 0
+  - locals[:bid] = bids[row]
+  - locals[:offer] = offers[row]
+  = render :partial => 'order_books/one_instrument_row', :locals => locals
