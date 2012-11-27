@@ -1,0 +1,17 @@
+#credentials
+  = form_tag '/auth/identity/callback', :class => 'form-horizontal', :noValidation => 'noValidation' do
+    - if flash[:notice]
+      .alert
+        %button(type="button" class="close" data-dismiss="alert") ×
+        = flash[:notice]
+    .control-group
+      = label :auth_key, 'Email', :class => 'control-label'
+      .controls
+        = text_field_tag :auth_key
+    .control-group
+      = label :password, 'Password', :class => 'control-label'
+      .controls
+        = password_field_tag :password
+    .control-group
+      .controls
+        = submit_tag t('.sign_up')
